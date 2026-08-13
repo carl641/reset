@@ -1,0 +1,692 @@
+/* ==========================================================================
+   The Reset Studio — homepage
+   Implemented from the Claude Design mockup "Reset Studio Homepage.dc.html".
+   Every colour, size and timing below is carried over from that file.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Palette */
+  --cream:      #f6f2ea;  /* page ground, light type on dark */
+  --sand:       #eae4d8;  /* alternating section ground */
+  --ink:        #4b4a43;  /* headings and body copy */
+  --stone:      #707067;  /* muted copy, link base, hero + footer ground */
+  --sage:       #868776;  /* primary action, promise band */
+  --sage-dark:  #6f7061;  /* primary action hover */
+  --tan:        #c9ad93;  /* eyebrows, rules, modality band */
+  --bark:       #40372e;  /* copy on the tan band */
+  --spark:      #fffdf8;  /* head of the converging lines */
+
+  --rule-stone-18: rgba(112, 112, 103, .18);
+  --rule-stone-14: rgba(112, 112, 103, .14);
+  --rule-sand-25:  rgba(234, 228, 216, .25);
+  --sand-70:       rgba(234, 228, 216, .7);
+
+  /* Type */
+  --font-serif: 'Libre Baskerville', serif;
+  --font-sans:  'Josefin Sans', sans-serif;
+
+  /* Layout */
+  --shell:   1280px;
+  --gutter:  48px;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+html, body { margin: 0; padding: 0; background: var(--cream); }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+a {
+  color: var(--stone);
+  text-decoration: none;
+  transition: color .2s, background-color .2s, border-color .2s;
+}
+a:hover { color: var(--sage); }
+
+a:focus-visible,
+.skip-link:focus-visible {
+  outline: 2px solid var(--tan);
+  outline-offset: 3px;
+}
+
+img { display: block; max-width: 100%; }
+
+figure { margin: 0; }
+
+address { font-style: normal; }
+
+::selection { background: var(--tan); color: var(--cream); }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 12px 20px;
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.skip-link:focus { left: 0; }
+
+/* --------------------------------------------------------------------------
+   Motion
+   -------------------------------------------------------------------------- */
+@keyframes hoverWave {
+  0%, 100% { transform: translateY(7px); }
+  50%      { transform: translateY(-7px); }
+}
+
+@keyframes breatheRing {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-50%, -50%) scale(1.45); }
+}
+
+@keyframes convergeLine {
+  0%   { transform: rotate(var(--a)) translateX(720px); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: .9; }
+  100% { transform: rotate(var(--a)) translateX(8px); opacity: 0; }
+}
+
+@keyframes convergeRing {
+  0%   { transform: translate(-50%, -50%) scale(3.2); opacity: 0; }
+  18%  { opacity: .38; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Shared pieces
+   -------------------------------------------------------------------------- */
+.shell,
+.site-header__inner,
+.triad__inner,
+.modalities__inner,
+.site-footer__inner {
+  max-width: var(--shell);
+  margin: 0 auto;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+}
+.kicker--tan   { color: var(--tan); }
+.kicker--cream { color: var(--cream); }
+
+.btn {
+  display: inline-block;
+  padding: 16px 38px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+
+.btn--sage { background: var(--sage); color: var(--cream); }
+.btn--sage:hover { background: var(--sage-dark); color: var(--cream); }
+
+.btn--cream { background: var(--cream); color: var(--ink); padding: 17px 42px; letter-spacing: .26em; }
+.btn--cream:hover { background: var(--tan); color: var(--cream); }
+
+.btn--outline { border: 1px solid var(--sage); color: var(--stone); padding: 15px 38px; }
+.btn--outline:hover { background: rgba(134, 135, 118, .12); color: var(--stone); }
+
+/* Matches the nav's own 12.5px, which this button inherited in the mockup. */
+.btn--compact { padding: 13px 30px; letter-spacing: .22em; font-size: 12.5px; }
+
+.link-underline {
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--tan);
+  padding-bottom: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.site-header {
+  background: var(--cream);
+  border-bottom: 1px solid var(--rule-stone-18);
+}
+
+.site-header__inner {
+  padding: 22px var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.site-header__brand { display: flex; align-items: center; }
+.site-header__brand img { height: 46px; width: auto; }
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  height: 82vh;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+.hero__ground { position: absolute; inset: 0; background: var(--stone); }
+
+.hero__rings { position: absolute; inset: 0; pointer-events: none; }
+
+.hero__ring {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: breatheRing 10s ease-in-out infinite;
+}
+.hero__ring--1 { width:  260px; height:  260px; border: 1px solid rgba(246, 242, 234, .50); }
+.hero__ring--2 { width:  520px; height:  520px; border: 1px solid rgba(246, 242, 234, .42); }
+.hero__ring--3 { width:  800px; height:  800px; border: 1px solid rgba(246, 242, 234, .34); }
+.hero__ring--4 { width: 1100px; height: 1100px; border: 1px solid rgba(246, 242, 234, .26); }
+.hero__ring--5 { width: 1420px; height: 1420px; border: 1px solid rgba(246, 242, 234, .18); }
+
+.hero__content {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.hero__content .kicker {
+  font-size: 12px;
+  letter-spacing: .34em;
+  margin-bottom: 26px;
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(52px, 6.5vw, 92px);
+  line-height: 1.04;
+  color: var(--cream);
+  margin: 0 0 22px;
+  max-width: 14ch;
+}
+
+.hero__lede {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--sand);
+  max-width: 52ch;
+  margin: 0 0 38px;
+}
+
+.hero__content .btn { pointer-events: auto; }
+
+/* --------------------------------------------------------------------------
+   Philosophy
+   -------------------------------------------------------------------------- */
+.philosophy {
+  padding: 130px 24px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.philosophy .kicker { margin-bottom: 34px; }
+
+.philosophy__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(34px, 3.6vw, 50px);
+  line-height: 1.28;
+  color: var(--ink);
+  margin: 0;
+  max-width: 26ch;
+}
+.philosophy__title em { font-style: italic; }
+
+.philosophy__body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--stone);
+  max-width: 58ch;
+  margin: 36px 0 0;
+}
+
+/* --------------------------------------------------------------------------
+   Relax / Refresh / Renew
+   -------------------------------------------------------------------------- */
+.triad {
+  background: var(--sand);
+  border-top: 1px solid var(--rule-stone-14);
+  border-bottom: 1px solid var(--rule-stone-14);
+}
+
+.triad__inner {
+  padding: 96px var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+}
+
+.triad__item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  align-items: center;
+  animation: hoverWave 7s ease-in-out infinite;
+}
+.triad__item:nth-child(2) { animation-delay: -5.83s; }
+.triad__item:nth-child(3) { animation-delay: -4.66s; }
+
+.triad__word {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--sage);
+}
+
+.triad__rule { width: 34px; height: 1px; background: var(--tan); }
+
+.triad__copy {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--stone);
+  max-width: 30ch;
+}
+
+/* --------------------------------------------------------------------------
+   Split sections (Experience / Visit)
+   -------------------------------------------------------------------------- */
+.split {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 130px var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 88px;
+  align-items: center;
+}
+
+.split__media { position: relative; overflow: hidden; }
+.split__media--portrait  { aspect-ratio: 4 / 5; }
+.split__media--landscape { aspect-ratio: 5 / 4; }
+.split__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+.split__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.split__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(34px, 3.4vw, 46px);
+  line-height: 1.22;
+  color: var(--ink);
+  margin: 0;
+}
+
+.split__copy {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--stone);
+  margin: 0;
+}
+
+.split__actions { display: flex; gap: 18px; flex-wrap: wrap; }
+
+/* --------------------------------------------------------------------------
+   Modalities intro (converging lines)
+   -------------------------------------------------------------------------- */
+.modalities-intro {
+  position: relative;
+  overflow: hidden;
+  background: var(--tan);
+  padding: 150px 24px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+}
+
+.converge { position: absolute; inset: 0; pointer-events: none; }
+
+.converge__dot {
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--cream);
+  border-radius: 50%;
+}
+
+.converge__line {
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  width: 300px;
+  height: 2px;
+  margin-top: -1px;
+  background: linear-gradient(90deg, var(--spark), rgba(246, 242, 234, 0));
+  transform-origin: 0 50%;
+  animation: convergeLine 24s linear infinite;
+}
+.converge__line--1 { --a:   0deg; }
+.converge__line--2 { --a: 180deg; animation-delay:  -4s; }
+.converge__line--3 { --a:  28deg; animation-delay:  -8s; }
+.converge__line--4 { --a: 152deg; animation-delay: -12s; }
+.converge__line--5 { --a:  65deg; animation-delay: -16s; }
+.converge__line--6 { --a: 115deg; animation-delay: -20s; }
+
+.modalities-intro > .kicker,
+.modalities-intro__title,
+.modalities-intro__copy { position: relative; }
+
+.modalities-intro__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(34px, 3.4vw, 46px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0;
+}
+
+.modalities-intro__copy {
+  font-size: 16.5px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--bark);
+  max-width: 56ch;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Modalities grid
+   -------------------------------------------------------------------------- */
+.modalities {
+  background: var(--sand);
+  border-top: 1px solid var(--rule-stone-14);
+}
+
+.modalities__inner { padding: 110px var(--gutter) 130px; }
+
+.modalities__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 32px;
+}
+
+.modality { display: flex; flex-direction: column; gap: 18px; }
+
+.modality__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.modality__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+.modality__title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.modality__copy {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--stone);
+}
+
+.modalities__action { display: flex; justify-content: center; margin-top: 64px; }
+
+/* --------------------------------------------------------------------------
+   Promise band
+   -------------------------------------------------------------------------- */
+.promise {
+  position: relative;
+  overflow: hidden;
+  background: var(--sage);
+  padding: 130px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+}
+
+.promise__rings { position: absolute; inset: 0; pointer-events: none; }
+
+.promise__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+}
+.promise__ring--static {
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(246, 242, 234, .35);
+}
+.promise__ring--1,
+.promise__ring--2,
+.promise__ring--3 {
+  border: 1px solid rgba(246, 242, 234, .45);
+  animation: convergeRing 12s linear infinite;
+}
+.promise__ring--2 { animation-delay: -4s; }
+.promise__ring--3 { animation-delay: -8s; }
+
+.promise > .kicker,
+.promise__quote { position: relative; }
+
+.promise__quote {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(38px, 4.6vw, 64px);
+  line-height: 1.18;
+  color: var(--cream);
+  max-width: 22ch;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.site-footer { background: var(--stone); color: var(--sand); }
+
+.site-footer__inner {
+  padding: 80px var(--gutter) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.site-footer__top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.site-footer__wordmark {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 30px;
+  letter-spacing: .14em;
+  color: var(--cream);
+}
+
+.site-footer__tagline {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+
+.site-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 13.5px;
+  font-weight: 300;
+}
+.site-footer__col p,
+.site-footer__col address { margin: 0; }
+.site-footer__col a { color: var(--sand); }
+.site-footer__col a:hover { color: var(--tan); }
+
+.site-footer__col .site-footer__heading {
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin: 0 0 4px;
+}
+
+.site-footer__bottom {
+  border-top: 1px solid var(--rule-sand-25);
+  padding-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--sand-70);
+}
+.site-footer__bottom p { margin: 0; }
+
+/* --------------------------------------------------------------------------
+   Responsive — the mockup is a desktop composition; these steps fold it down
+   without changing the desktop rendering.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1040px) {
+  :root { --gutter: 32px; }
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 96px var(--gutter);
+  }
+
+  .site-footer__top { grid-template-columns: 1fr 1fr; gap: 48px; }
+  .site-footer__brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 900px) {
+  .site-header__inner {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px var(--gutter);
+  }
+  .site-nav { flex-wrap: wrap; justify-content: center; gap: 24px; }
+}
+
+@media (max-width: 860px) {
+  .triad__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 72px var(--gutter);
+  }
+
+  .modalities__grid { grid-template-columns: 1fr; gap: 48px; }
+  .modalities__inner { padding: 80px var(--gutter) 96px; }
+  .modalities__action { margin-top: 48px; }
+
+  .philosophy { padding: 96px 24px 88px; }
+  .modalities-intro { padding: 110px 24px 88px; }
+  .promise { padding: 96px 24px; }
+}
+
+@media (max-width: 640px) {
+  :root { --gutter: 24px; }
+
+  /* Let the hero grow with its copy instead of holding 82vh. `relative`, not
+     `static` — the ground and rings are absolute and would paint over
+     unpositioned in-flow content. */
+  .hero { height: auto; min-height: 0; padding: 120px 0 130px; }
+  .hero__content { position: relative; inset: auto; }
+
+  .split__actions { width: 100%; }
+  .split__actions .btn { flex: 1 1 auto; text-align: center; }
+
+  .site-footer__top { grid-template-columns: 1fr; gap: 40px; }
+  .site-footer__inner { padding: 64px var(--gutter) 32px; gap: 48px; }
+  .site-footer__bottom { flex-direction: column; gap: 12px; }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion — the page's ambient loops are decorative, so settle them.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+
+  /* The loops resolve to a settled frame rather than reverting to their
+     untransformed base, which would stack all six lines flat on the dot. */
+  .converge__line {
+    animation: none;
+    transform: rotate(var(--a)) translateX(56px);
+    opacity: .55;
+  }
+  .promise__ring--1,
+  .promise__ring--2,
+  .promise__ring--3 { display: none; }
+}
