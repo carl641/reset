@@ -188,6 +188,72 @@ address { font-style: normal; }
 }
 
 /* --------------------------------------------------------------------------
+   Modalities dropdown
+
+   No JavaScript: the trigger is a real link to the modalities index, so a tap
+   or a click always lands somewhere useful, and the panel is revealed by
+   :hover / :focus-within for pointer and keyboard. Below 900px the panel is
+   dropped entirely and the link alone carries the menu.
+   -------------------------------------------------------------------------- */
+.nav-drop { position: relative; display: flex; align-items: center; }
+
+/* Bridges the gap between the link and the panel so the pointer can cross it
+   without the panel closing under it. */
+.nav-drop::after {
+  content: '';
+  position: absolute;
+  left: -24px;
+  right: -24px;
+  top: 100%;
+  height: 26px;
+}
+
+.nav-drop__panel {
+  position: absolute;
+  top: calc(100% + 26px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  min-width: 272px;
+  padding: 22px 26px 20px;
+  background: var(--cream);
+  border: 1px solid var(--rule-stone-18);
+  box-shadow: 0 18px 40px rgba(75, 74, 67, .10);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s;
+}
+.nav-drop:hover .nav-drop__panel,
+.nav-drop:focus-within .nav-drop__panel { opacity: 1; visibility: visible; }
+
+.nav-drop__heading {
+  margin: 0 0 16px;
+  font-size: 10.5px;
+  letter-spacing: .28em;
+  color: var(--tan);
+}
+
+.nav-drop__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  text-align: left;
+}
+.nav-drop__list a { display: block; font-size: 12px; letter-spacing: .16em; }
+.nav-drop__list a[aria-current="page"] { color: var(--sage); }
+
+.nav-drop__all {
+  margin-top: 5px;
+  padding-top: 15px;
+  border-top: 1px solid var(--rule-stone-14);
+}
+.nav-drop__all a { color: var(--tan); }
+.nav-drop__all a:hover { color: var(--sage); }
+
+/* --------------------------------------------------------------------------
    Hero
    -------------------------------------------------------------------------- */
 .hero {
@@ -482,7 +548,27 @@ address { font-style: normal; }
   color: var(--stone);
 }
 
+.modality__meta {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+
 .modalities__action { display: flex; justify-content: center; margin-top: 64px; }
+
+/* A whole card as a link — used on the modality pages and the index. */
+.modality--link { color: inherit; }
+.modality--link:hover { color: inherit; }
+.modality__title { transition: color .2s; }
+.modality--link .modality__media img { transition: transform .8s ease; }
+.modality--link:hover .modality__media img { transform: scale(1.04); }
+.modality--link:hover .modality__title { color: var(--sage); }
+
+@media (prefers-reduced-motion: reduce) {
+  .modality--link:hover .modality__media img { transform: none; }
+}
 
 /* --------------------------------------------------------------------------
    Promise band
@@ -537,6 +623,308 @@ address { font-style: normal; }
 }
 
 /* --------------------------------------------------------------------------
+   Modality pages — hero
+   -------------------------------------------------------------------------- */
+.page-hero {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 80px var(--gutter) 96px;
+}
+
+.page-hero__inner {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 76px;
+  align-items: center;
+}
+
+.page-hero__body { display: flex; flex-direction: column; align-items: flex-start; }
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  font-size: 11.5px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.crumbs__sep { color: var(--tan); }
+
+.page-hero__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(38px, 4.2vw, 56px);
+  line-height: 1.14;
+  color: var(--ink);
+  margin: 0;
+  max-width: 16ch;
+}
+
+.page-hero__tagline {
+  margin: 20px 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--stone);
+  max-width: 34ch;
+}
+
+.page-hero__lede {
+  margin: 22px 0 0;
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--stone);
+  max-width: 52ch;
+}
+
+.facts {
+  width: 100%;
+  margin: 36px 0 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule-stone-18);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 52px;
+}
+.facts dt {
+  font-size: 10.5px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+.facts dd { margin: 9px 0 0; font-size: 14.5px; color: var(--ink); }
+
+.page-hero__body .btn { margin-top: 38px; }
+
+.page-hero__media { aspect-ratio: 4 / 5; overflow: hidden; }
+.page-hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+/* --------------------------------------------------------------------------
+   Modality pages — narrative and outcomes rail
+   -------------------------------------------------------------------------- */
+.detail {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 92px var(--gutter) 110px;
+  border-top: 1px solid var(--rule-stone-18);
+}
+
+.detail__inner {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 88px;
+  align-items: start;
+}
+
+.prose .kicker { margin-bottom: 28px; }
+.prose p {
+  margin: 0 0 22px;
+  font-size: 16.5px;
+  line-height: 1.9;
+  color: var(--stone);
+  max-width: 60ch;
+}
+.prose p:last-child { margin-bottom: 0; }
+
+.rail { border-left: 1px solid var(--rule-stone-18); padding-left: 44px; }
+
+.rail__title {
+  margin: 0 0 22px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--ink);
+}
+.rail__title--second { margin-top: 46px; }
+
+.rail__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.rail__list li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--stone);
+}
+.rail__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 13px;
+  height: 1px;
+  background: var(--tan);
+}
+
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tags li {
+  padding: 9px 16px;
+  border: 1px solid var(--rule-stone-18);
+  font-size: 11.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+/* --------------------------------------------------------------------------
+   Modality pages — what the session is like
+   -------------------------------------------------------------------------- */
+.steps {
+  background: var(--sand);
+  border-top: 1px solid var(--rule-stone-14);
+  border-bottom: 1px solid var(--rule-stone-14);
+}
+
+.steps__inner { max-width: var(--shell); margin: 0 auto; padding: 100px var(--gutter); }
+
+.steps__title {
+  margin: 24px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.22;
+  color: var(--ink);
+  max-width: 18ch;
+}
+
+.steps__list {
+  list-style: none;
+  counter-reset: step;
+  margin: 54px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule-stone-18);
+}
+
+.step {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: .34fr 1fr;
+  gap: 48px;
+  align-items: start;
+  padding: 34px 0;
+  border-bottom: 1px solid var(--rule-stone-18);
+}
+
+.step__title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--ink);
+}
+.step__title::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--tan);
+}
+
+.step__copy {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--stone);
+  max-width: 54ch;
+}
+
+/* --------------------------------------------------------------------------
+   Modality pages — pairs with
+   -------------------------------------------------------------------------- */
+.related__inner { max-width: var(--shell); margin: 0 auto; padding: 100px var(--gutter) 116px; }
+
+.related__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 50px;
+}
+
+.related__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(28px, 2.8vw, 38px);
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   CTA band — the promise band's rings, carrying an action
+   -------------------------------------------------------------------------- */
+.cta-band {
+  position: relative;
+  overflow: hidden;
+  background: var(--sage);
+  padding: 120px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+}
+
+.cta-band__rings { position: absolute; inset: 0; pointer-events: none; }
+
+.cta-band > .kicker,
+.cta-band__title,
+.cta-band__copy,
+.cta-band__actions { position: relative; }
+
+.cta-band__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.2;
+  color: var(--cream);
+  max-width: 20ch;
+}
+
+.cta-band__copy {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--sand);
+  max-width: 56ch;
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 14px;
+}
+
+.btn--ghost {
+  border: 1px solid rgba(246, 242, 234, .55);
+  color: var(--cream);
+  padding: 15px 38px;
+}
+.btn--ghost:hover { background: rgba(246, 242, 234, .14); color: var(--cream); }
+
+/* --------------------------------------------------------------------------
    Footer
    -------------------------------------------------------------------------- */
 .site-footer { background: var(--stone); color: var(--sand); }
@@ -550,8 +938,8 @@ address { font-style: normal; }
 
 .site-footer__top {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  gap: 56px;
   align-items: start;
 }
 
@@ -623,6 +1011,21 @@ address { font-style: normal; }
     padding: 96px var(--gutter);
   }
 
+  .page-hero {
+    padding: 56px var(--gutter) 72px;
+  }
+  .page-hero__inner { grid-template-columns: 1fr; gap: 48px; }
+  .page-hero__media { aspect-ratio: 5 / 4; }
+
+  .detail { padding: 72px var(--gutter) 88px; }
+  .detail__inner { grid-template-columns: 1fr; gap: 56px; }
+  .rail {
+    border-left: none;
+    border-top: 1px solid var(--rule-stone-18);
+    padding-left: 0;
+    padding-top: 44px;
+  }
+
   .site-footer__top { grid-template-columns: 1fr 1fr; gap: 48px; }
   .site-footer__brand { grid-column: 1 / -1; }
 }
@@ -634,6 +1037,10 @@ address { font-style: normal; }
     padding: 20px var(--gutter);
   }
   .site-nav { flex-wrap: wrap; justify-content: center; gap: 24px; }
+
+  /* The trigger is a link to the index, so dropping the panel loses nothing. */
+  .nav-drop::after,
+  .nav-drop__panel { display: none; }
 }
 
 @media (max-width: 860px) {
@@ -650,6 +1057,15 @@ address { font-style: normal; }
   .philosophy { padding: 96px 24px 88px; }
   .modalities-intro { padding: 110px 24px 88px; }
   .promise { padding: 96px 24px; }
+
+  .steps__inner { padding: 72px var(--gutter); }
+  .steps__list { margin-top: 40px; }
+  .step { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+
+  .related__inner { padding: 72px var(--gutter) 88px; }
+  .related__head { margin-bottom: 40px; }
+
+  .cta-band { padding: 96px 24px; }
 }
 
 @media (max-width: 640px) {
@@ -663,6 +1079,10 @@ address { font-style: normal; }
 
   .split__actions { width: 100%; }
   .split__actions .btn { flex: 1 1 auto; text-align: center; }
+
+  .facts { gap: 22px 36px; }
+  .cta-band__actions { width: 100%; }
+  .cta-band__actions .btn { flex: 1 1 auto; text-align: center; }
 
   .site-footer__top { grid-template-columns: 1fr; gap: 40px; }
   .site-footer__inner { padding: 64px var(--gutter) 32px; gap: 48px; }
