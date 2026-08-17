@@ -925,6 +925,116 @@ address { font-style: normal; }
 .btn--ghost:hover { background: rgba(246, 242, 234, .14); color: var(--cream); }
 
 /* --------------------------------------------------------------------------
+   About page
+   -------------------------------------------------------------------------- */
+
+/* The modality hero carries a photograph alongside its copy; the about hero
+   is copy alone, so it takes the full shell and its measures open up. */
+.page-hero--solo .page-hero__inner { grid-template-columns: 1fr; }
+.page-hero--solo .page-hero__title { max-width: 20ch; }
+.page-hero--solo .page-hero__lede { max-width: 62ch; }
+.page-hero--solo .kicker { margin-bottom: 26px; }
+
+.about-split {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 92px var(--gutter) 110px;
+  border-top: 1px solid var(--rule-stone-18);
+  display: grid;
+  gap: 88px;
+  align-items: start;
+}
+
+/* Copy leads, the field sits alongside it. */
+.about-split--story { grid-template-columns: 1.1fr .9fr; }
+
+/* The portrait leads, and carries the credentials under it. */
+.about-split--prac { grid-template-columns: .78fr 1.22fr; }
+
+.about-split__title {
+  margin: 0 0 30px;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.22;
+  color: var(--ink);
+}
+.about-split__title--tight { margin-bottom: 12px; }
+
+.about-split__role {
+  margin: 0 0 30px;
+  font-size: 11.5px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+
+.about-split__media { aspect-ratio: 4 / 5; overflow: hidden; }
+.about-split__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+.creds {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule-stone-18);
+}
+.creds li {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule-stone-18);
+  font-size: 11.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.about-actions {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 32px;
+}
+
+/* --- Why we exist: the sage band, set left rather than centred ------------- */
+.why {
+  background: var(--sage);
+  padding: 110px var(--gutter);
+}
+
+.why__inner { max-width: var(--shell); margin: 0 auto; }
+
+.why__eyebrow { margin: 0; }
+
+.why__lead {
+  margin: 28px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.24;
+  color: var(--cream);
+  max-width: 26ch;
+}
+
+.why__body {
+  margin: 30px 0 0;
+  font-size: 16.5px;
+  line-height: 1.9;
+  color: var(--sand-70);
+  max-width: 62ch;
+}
+
+.why__sig {
+  margin: 46px 0 0;
+  padding-top: 30px;
+  border-top: 1px solid var(--rule-sand-25);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--cream);
+}
+
+/* --------------------------------------------------------------------------
    Footer
    -------------------------------------------------------------------------- */
 .site-footer { background: var(--stone); color: var(--sand); }
@@ -1026,6 +1136,13 @@ address { font-style: normal; }
     padding-top: 44px;
   }
 
+  .about-split { padding: 72px var(--gutter) 88px; grid-template-columns: 1fr; gap: 56px; }
+
+  /* Stacked, a 4/5 frame at full shell width is a wall. The field goes
+     landscape and the portrait keeps a sensible column of its own. */
+  .about-split--story .about-split__media { aspect-ratio: 5 / 4; }
+  .about-split--prac .about-split__aside { max-width: 440px; }
+
   .site-footer__top { grid-template-columns: 1fr 1fr; gap: 48px; }
   .site-footer__brand { grid-column: 1 / -1; }
 }
@@ -1057,6 +1174,8 @@ address { font-style: normal; }
   .philosophy { padding: 96px 24px 88px; }
   .modalities-intro { padding: 110px 24px 88px; }
   .promise { padding: 96px 24px; }
+  .why { padding: 88px 24px; }
+
 
   .steps__inner { padding: 72px var(--gutter); }
   .steps__list { margin-top: 40px; }
