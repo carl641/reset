@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="../styles.css">
+<script src="../booking.js" defer></script>
 </head>
 <body>
 
@@ -22,7 +23,6 @@
     </a>
     <nav class="site-nav" aria-label="Primary">
       <a href="../about/">About</a>
-      <a href="../#experience">The Experience</a>
       <div class="nav-drop">
         <a class="nav-drop__link" href="../modalities/">Modalities</a>
         <div class="nav-drop__panel">
@@ -42,8 +42,7 @@
       </div>
       <a href="../first-visit/">First Visit</a>
       <a href="./" aria-current="page">Membership</a>
-      <a href="../#visit">Visit</a>
-      <a class="btn btn--sage btn--compact" href="#">Book a Reset</a>
+      <a class="btn btn--sage btn--compact" href="#" data-blvd-book>Book a Reset</a>
     </nav>
   </div>
 </header>
@@ -82,7 +81,7 @@
           <li>Priority booking window ahead of general release</li>
           <li>Bring a guest once a month at the member rate</li>
         </ul>
-        <a class="btn btn--outline" href="#">Book Your Reset</a>
+        <a class="btn btn--outline" href="#" data-blvd-book>Book Your Reset</a>
       </div>
 
       <div class="tier tier--lift">
@@ -101,7 +100,7 @@
           <li>A seasonal review of your plan as your goals change</li>
           <li>Bring a guest twice a month at the member rate</li>
         </ul>
-        <a class="btn btn--cream" href="#">Book Your Reset</a>
+        <a class="btn btn--cream" href="#" data-blvd-book>Book Your Reset</a>
       </div>
 
     </div>
@@ -191,7 +190,7 @@
     <h2 class="cta-band__title">Start with a single visit.</h2>
     <p class="cta-band__copy">Nobody should buy a membership for a studio they have never been inside. Come once, see whether it fits, and decide afterwards.</p>
     <div class="cta-band__actions">
-      <a class="btn btn--cream" href="#">Book Your Reset</a>
+      <a class="btn btn--cream" href="#" data-blvd-book>Book Your Reset</a>
       <a class="btn btn--ghost" href="../first-visit/">Plan your first visit</a>
     </div>
   </section>

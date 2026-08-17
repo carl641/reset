@@ -19,6 +19,7 @@ npx http-server -p 8080
 | `modalities/<slug>.html` | One page per modality |
 | `first-visit/index.html` | The First Visit page — how a first visit goes, how to prepare, and the FAQs |
 | `memberships/index.html` | The Memberships page — the two tiers, packages and gift cards |
+| `booking.js` | The Boulevard self-booking overlay — loads the injector and opens it from every booking button |
 | `styles.css` | All styling for every page. Palette, type and layout tokens live in `:root` |
 | `assets/` | Logo, the five photographs from the mockup, five abstract fields, and Dr. Candy Ellis' portrait |
 
@@ -195,25 +196,50 @@ three packages and the gift card paragraph.
 file carries, and it marks them as unconfirmed. Both need checking against the
 booking system before launch; the HTML says so at the tier block.
 
-**Navigation.** "First Visit" and "Membership" join the header nav before
-"Visit", and the footer's Explore column on every page. The home page's "Plan
+**Navigation.** "First Visit" and "Membership" join the header nav and the
+footer's Explore column on every page. "The Experience" and "Visit" have since
+been dropped from the header nav — they were the only two items pointing at
+anchors on the home page rather than at pages of their own. Both still sit in
+the footer's Explore column, so the sections remain reachable. The home page's "Plan
 your first visit" and "Explore Membership" links and the About page's "What to
 expect" button now point at these two pages instead of `#`.
+
+## Booking
+
+Every booking button on the site opens the Boulevard self-booking overlay.
+`booking.js` loads Boulevard's injector once per page, calls `blvd.init()` with
+the studio's `businessId`, and opens the overlay from any element carrying
+`data-blvd-book` — the header's "Book a Reset", the hero and CTA-band buttons,
+the per-modality "Book …" buttons, both membership tier buttons, and the About
+page's "Chiropractic consultation". Adding a booking button anywhere else is one
+attribute; nothing needs registering.
+
+The buttons keep `href="#"` and the handler cancels the jump, so the markup
+still reads as a link and a click never scrolls the page. A click that lands
+before the injector has finished downloading is held and replayed once it loads,
+rather than being dropped.
+
+Boulevard can open the overlay directly on a service or category rather than at
+the menu. `booking.js` supports that through two optional attributes on any
+booking button — `data-blvd-path` and `data-blvd-visit-type`, which become
+Boulevard's `urlParams` — but neither is set anywhere yet, because the service
+ids come out of the Boulevard dashboard. Filling them in on the eight modality
+pages would send each "Book <modality>" button straight to that service.
 
 ## Before launch
 
 Placeholder content carried over from the mockup: the address, hours and email
-in the footer, and every `href="#"` (all "Book Your Reset" / "Book a Reset"
-buttons, the per-modality "Book …" buttons, both membership tier buttons, and
-"Buy a gift card" — the source site points that last one at its contact page,
-which this site does not have). The photographs are stock imagery from the
+in the footer, and "Buy a gift card" — the source site points that one at its
+contact page, which this site does not have, and Boulevard sells gift cards
+through a separate hosted page rather than the booking overlay. The photographs are stock imagery from the
 mockup and should be replaced with the studio's own.
 
-The About page adds two more of those. "Chiropractic consultation" and "All
-chiropractic services" point at `/services/…` on the source site, and this site
-has no chiropractic content, so they carry `href="#"` rather than a link that
-would 404. They need either real pages here or an explicit link across to the
-Astro site. ("What to expect" was the third; it now points at First Visit.)
+The About page adds one more. "All chiropractic services" points at
+`/services/…` on the source site, and this site has no chiropractic content, so
+it carries `href="#"` rather than a link that would 404. It needs either a real
+page here or an explicit link across to the Astro site. (Of the three links that
+started out that way, "What to expect" now points at First Visit and
+"Chiropractic consultation" opens the booking overlay.)
 
 The two membership prices are unconfirmed — see the Memberships section above.
 
