@@ -187,6 +187,10 @@ address { font-style: normal; }
   text-transform: uppercase;
 }
 
+/* Two-word items break mid-label long before the row runs out of room, so the
+   nav is allowed to wrap between items and never inside one. */
+.site-nav a { white-space: nowrap; }
+
 /* --------------------------------------------------------------------------
    Modalities dropdown
 
@@ -1109,11 +1113,369 @@ address { font-style: normal; }
 .site-footer__bottom p { margin: 0; }
 
 /* --------------------------------------------------------------------------
+   First visit — how the visit goes
+
+   The arc of a visit reuses the modality pages' step rows. The counter is
+   swapped for the moment in the visit, so the two-column rhythm carries over
+   unchanged and only the label in the left column is new.
+   -------------------------------------------------------------------------- */
+.steps--plain { background: var(--cream); border-bottom: none; }
+
+.steps__list--timed { counter-reset: none; }
+.steps__list--timed .step__title::before { content: none; }
+
+.step__time {
+  margin: 0;
+  padding-top: 4px;
+  font-size: 11.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+
+.step__body .step__title { margin-bottom: 14px; }
+.step__body .step__copy { max-width: 58ch; }
+
+/* --- Preparing: four short lists rather than one long one ----------------- */
+.prep {
+  background: var(--sand);
+  border-top: 1px solid var(--rule-stone-14);
+  border-bottom: 1px solid var(--rule-stone-14);
+}
+
+.prep__inner { max-width: var(--shell); margin: 0 auto; padding: 100px var(--gutter); }
+
+.prep__title {
+  margin: 24px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.22;
+  color: var(--ink);
+  max-width: 20ch;
+}
+
+.prep__copy {
+  margin: 24px 0 0;
+  font-size: 16.5px;
+  line-height: 1.9;
+  color: var(--stone);
+  max-width: 58ch;
+}
+
+.prep__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 54px;
+}
+
+.prep__block {
+  background: var(--cream);
+  border: 1px solid var(--rule-stone-18);
+  padding: 34px 36px;
+}
+
+.prep__heading {
+  margin: 0 0 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule-stone-18);
+  font-size: 11.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+/* The screening paragraph, set quieter than the lists it follows. */
+.prep__note {
+  margin: 44px 0 0;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--stone);
+  max-width: 76ch;
+}
+
+/* --------------------------------------------------------------------------
+   First visit — questions
+
+   Native <details>, so the accordion needs no JavaScript and each answer is
+   still in the page for search engines and for find-on-page.
+   -------------------------------------------------------------------------- */
+.faqs__inner { max-width: var(--shell); margin: 0 auto; padding: 100px var(--gutter) 116px; }
+
+.faqs__title {
+  margin: 24px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.22;
+  color: var(--ink);
+  max-width: 18ch;
+}
+
+.faq-group { margin-top: 54px; }
+
+.faq-group__list { margin-top: 20px; border-top: 1px solid var(--rule-stone-18); }
+
+.faq { border-bottom: 1px solid var(--rule-stone-18); }
+
+.faq__q {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 26px 48px 26px 0;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink);
+  transition: color .2s;
+}
+.faq__q::-webkit-details-marker { display: none; }
+.faq__q:hover { color: var(--sage); }
+
+/* A chevron rather than a plus: it rotates through to point up when open. */
+.faq__q::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -8px;
+  border-right: 1px solid var(--tan);
+  border-bottom: 1px solid var(--tan);
+  transform: rotate(45deg);
+  transition: transform .25s;
+}
+.faq[open] .faq__q::after { margin-top: -3px; transform: rotate(-135deg); }
+
+.faq__a {
+  margin: 0 0 30px;
+  padding-right: 48px;
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--stone);
+  max-width: 76ch;
+}
+
+/* --------------------------------------------------------------------------
+   Memberships — the two tiers
+   -------------------------------------------------------------------------- */
+.tiers {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 92px var(--gutter) 110px;
+  border-top: 1px solid var(--rule-stone-18);
+}
+
+.tiers__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.06fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.tier {
+  border: 1px solid var(--rule-stone-18);
+  padding: 46px 44px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The higher tier sits proud of the other rather than matching it. */
+.tier--lift {
+  margin-top: -36px;
+  background: var(--sage);
+  border-color: transparent;
+}
+
+.tier__name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.tier__position {
+  margin: 16px 0 0;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--stone);
+  max-width: 40ch;
+}
+
+.tier__price {
+  margin: 34px 0 0;
+  padding-bottom: 34px;
+  border-bottom: 1px solid var(--rule-stone-18);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.tier__amount {
+  font-family: var(--font-serif);
+  font-size: 44px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.tier__per {
+  font-size: 11.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.tier .rail__list { margin: 34px 0 40px; flex: 1; }
+.tier .btn { align-self: flex-start; }
+
+/* On the sage tier the tan dash and the stone copy both fall away, so the
+   list and its rules step up to sand. */
+.tier--lift .tier__name,
+.tier--lift .tier__amount { color: var(--cream); }
+.tier--lift .tier__position,
+.tier--lift .tier__per,
+.tier--lift .rail__list li { color: var(--sand); }
+.tier--lift .tier__price { border-bottom-color: var(--rule-sand-25); }
+.tier--lift .rail__list li::before { background: var(--sand-70); }
+
+.tiers__note {
+  margin: 44px 0 0;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--stone);
+  max-width: 68ch;
+}
+
+/* --- What membership changes --------------------------------------------- */
+.benefits {
+  background: var(--sand);
+  border-top: 1px solid var(--rule-stone-14);
+  border-bottom: 1px solid var(--rule-stone-14);
+}
+
+.benefits__inner { max-width: var(--shell); margin: 0 auto; padding: 100px var(--gutter); }
+
+.benefits__title {
+  margin: 24px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.22;
+  color: var(--ink);
+  max-width: 18ch;
+}
+
+.benefits__grid {
+  list-style: none;
+  margin: 54px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 44px 64px;
+}
+
+.benefit__title {
+  margin: 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule-stone-18);
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.benefit__copy {
+  margin: 16px 0 0;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--stone);
+  max-width: 46ch;
+}
+
+/* --- Packages ------------------------------------------------------------- */
+.packages__inner { max-width: var(--shell); margin: 0 auto; padding: 100px var(--gutter); }
+
+.packages__title {
+  margin: 24px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(28px, 2.8vw, 38px);
+  line-height: 1.25;
+  color: var(--ink);
+  max-width: 22ch;
+}
+
+.packages__copy {
+  margin: 24px 0 0;
+  font-size: 16.5px;
+  line-height: 1.9;
+  color: var(--stone);
+  max-width: 58ch;
+}
+
+.packages__grid {
+  list-style: none;
+  margin: 54px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.pk { border: 1px solid var(--rule-stone-18); padding: 34px 36px; }
+
+.pk__count {
+  margin: 0 0 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-size: 44px;
+  line-height: 1;
+  color: var(--tan);
+}
+.pk__count span {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.pk__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.pk__copy { margin: 14px 0 0; font-size: 15.5px; line-height: 1.8; color: var(--stone); }
+
+.pk__note {
+  margin: 24px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule-stone-18);
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--stone);
+}
+
+/* --------------------------------------------------------------------------
    Responsive — the mockup is a desktop composition; these steps fold it down
    without changing the desktop rendering.
    -------------------------------------------------------------------------- */
 @media (max-width: 1040px) {
   :root { --gutter: 32px; }
+
+  /* Six items and a button no longer clear a 1040px row; the nav wraps under
+     the logo rather than squashing, until the header stacks at 900px. */
+  .site-nav { gap: 26px; flex-wrap: wrap; justify-content: flex-end; }
 
   .split {
     grid-template-columns: 1fr;
@@ -1142,6 +1504,11 @@ address { font-style: normal; }
      landscape and the portrait keeps a sensible column of its own. */
   .about-split--story .about-split__media { aspect-ratio: 5 / 4; }
   .about-split--prac .about-split__aside { max-width: 440px; }
+
+  /* Stacked, the raised tier has nothing to sit proud of. */
+  .tiers { padding: 72px var(--gutter) 88px; }
+  .tiers__grid { grid-template-columns: 1fr; gap: 28px; }
+  .tier--lift { margin-top: 0; }
 
   .site-footer__top { grid-template-columns: 1fr 1fr; gap: 48px; }
   .site-footer__brand { grid-column: 1 / -1; }
@@ -1185,6 +1552,20 @@ address { font-style: normal; }
   .related__head { margin-bottom: 40px; }
 
   .cta-band { padding: 96px 24px; }
+
+  .prep__inner { padding: 72px var(--gutter); }
+  .prep__grid { grid-template-columns: 1fr; margin-top: 40px; }
+
+  .faqs__inner { padding: 72px var(--gutter) 88px; }
+  .faq-group { margin-top: 40px; }
+
+  .benefits__inner { padding: 72px var(--gutter); }
+  .benefits__grid { grid-template-columns: 1fr; margin-top: 40px; gap: 36px; }
+
+  .packages__inner { padding: 72px var(--gutter); }
+  .packages__grid { grid-template-columns: 1fr; margin-top: 40px; }
+
+  .tier { padding: 38px 30px; }
 }
 
 @media (max-width: 640px) {
