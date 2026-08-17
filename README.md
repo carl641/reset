@@ -17,6 +17,8 @@ npx http-server -p 8080
 | `about/index.html` | The About page — the story, the philosophy, and Dr. Candy Ellis |
 | `modalities/index.html` | The Modalities listing — all eight modalities as cards |
 | `modalities/<slug>.html` | One page per modality |
+| `first-visit/index.html` | The First Visit page — how a first visit goes, how to prepare, and the FAQs |
+| `memberships/index.html` | The Memberships page — the two tiers, packages and gift cards |
 | `styles.css` | All styling for every page. Palette, type and layout tokens live in `:root` |
 | `assets/` | Logo, the five photographs from the mockup, five abstract fields, and Dr. Candy Ellis' portrait |
 
@@ -97,7 +99,7 @@ and below 900px the panel is dropped and the link alone carries the menu. The
 footer gained a Modalities column on every page.
 
 **No build step, but shared chrome.** The header, footer and CTA band are
-duplicated across the ten HTML files rather than templated. Editing one means
+duplicated across the thirteen HTML files rather than templated. Editing one means
 editing all of them — they were generated together and are byte-identical apart
 from the current-page `aria-current` and the `../` prefixes on subpage links.
 
@@ -141,22 +143,79 @@ story section keeps the abstract light field the source page had there
 is decorative, carries an empty `alt`, and wants a real photograph.
 
 **Navigation.** "About" is now the first item in the header nav and the first
-link in the footer's Explore column, on all eleven pages.
+link in the footer's Explore column, on all thirteen pages.
+
+## First Visit
+
+`first-visit/index.html` is moved across from
+`https://carl641.github.io/theresetstudio/first-visit/` — the
+`src/pages/first-visit.astro` page of the `carl641/theresetstudio` Astro site,
+with its FAQ accordion filled from `src/data/faqs.ts`. Every word is verbatim:
+the hero, the four moments of a first visit, the four preparation lists, the
+screening paragraph, and all twenty questions across their five groups.
+`site.clinicalEntity` in the screening paragraph resolves to `Dr. Candy, LLC`.
+
+**Mapped onto patterns the site already had**, rather than restyled:
+
+- The `PageHero` is `.page-hero--solo`, as on the About page
+- The four moments reuse `.steps` / `.step` from the modality pages in a
+  `--plain` variant on cream. `.steps__list--timed` swaps the leading-zero
+  counter for the moment in the visit, so the two-column rhythm is unchanged
+- The preparation lists are new `.prep` cards on the sand band, and each list is
+  the site's own `.rail__list` with its tan dashes
+- The accordion is native `<details>` / `<summary>`, so it needs no JavaScript
+  and every answer stays in the page for search and for find-on-page. The
+  chevron is a rotated border corner
+- The `CtaBand` is the site's `.cta-band`. The source's secondary "View services"
+  button points at the Modalities listing, which is this site's equivalent
+
+The source page also emits `FAQPage` structured data. No page on this site
+carries JSON-LD yet, so it was left out rather than added in isolation.
+
+## Memberships
+
+`memberships/index.html` is moved across from
+`https://carl641.github.io/theresetstudio/memberships/` — the
+`src/pages/memberships.astro` page, with its content from
+`src/data/memberships.ts`. Verbatim again: both tiers with their positioning and
+inclusions, the pause-and-attribution note, the four membership benefits, the
+three packages and the gift card paragraph.
+
+- The two tiers are a new `.tiers` grid. The higher tier is `.tier--lift`: the
+  sage band from elsewhere on the site, raised 36px above its neighbour, exactly
+  as the source page raises it. Stacked below 1040px the offset is dropped
+- Tier inclusions are `.rail__list` again; on the sage card the tan dash and
+  stone copy fall away, so both step up to sand
+- The benefits are a two-column `.benefits` grid on the sand band, packages are
+  `.pk` cards on cream, and gift cards reuse the home page's `.split` band with
+  the sauna-bench photograph
+- The `CtaBand` is `.cta-band`, its secondary button pointing at First Visit
+
+**Pricing is a placeholder.** `$189` and `$329` are the numbers the source data
+file carries, and it marks them as unconfirmed. Both need checking against the
+booking system before launch; the HTML says so at the tier block.
+
+**Navigation.** "First Visit" and "Membership" join the header nav before
+"Visit", and the footer's Explore column on every page. The home page's "Plan
+your first visit" and "Explore Membership" links and the About page's "What to
+expect" button now point at these two pages instead of `#`.
 
 ## Before launch
 
 Placeholder content carried over from the mockup: the address, hours and email
 in the footer, and every `href="#"` (all "Book Your Reset" / "Book a Reset"
-buttons, the per-modality "Book …" buttons, "Explore Membership", "Plan your
-first visit", "Membership"). The photographs are stock imagery from the mockup
-and should be replaced with the studio's own.
+buttons, the per-modality "Book …" buttons, both membership tier buttons, and
+"Buy a gift card" — the source site points that last one at its contact page,
+which this site does not have). The photographs are stock imagery from the
+mockup and should be replaced with the studio's own.
 
-The About page adds three more of those. "Chiropractic consultation", "All
-chiropractic services" and "What to expect" point at `/services/…` and
-`/first-visit/` on the source site, and this site has neither chiropractic
-content nor a first-visit page, so they carry `href="#"` rather than a link that
+The About page adds two more of those. "Chiropractic consultation" and "All
+chiropractic services" point at `/services/…` on the source site, and this site
+has no chiropractic content, so they carry `href="#"` rather than a link that
 would 404. They need either real pages here or an explicit link across to the
-Astro site.
+Astro site. ("What to expect" was the third; it now points at First Visit.)
+
+The two membership prices are unconfirmed — see the Memberships section above.
 
 Five modalities have no photograph yet — contrast therapy, Flowpresso®,
 NormaTec®, sound therapy and neuro light therapy. They carry the abstract
