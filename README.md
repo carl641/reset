@@ -14,10 +14,11 @@ npx http-server -p 8080
 | Path | What it is |
 | --- | --- |
 | `index.html` | The home page — semantic markup, one section per block of the mockup |
+| `about/index.html` | The About page — the story, the philosophy, and Dr. Candy Ellis |
 | `modalities/index.html` | The Modalities listing — all eight modalities as cards |
 | `modalities/<slug>.html` | One page per modality |
 | `styles.css` | All styling for every page. Palette, type and layout tokens live in `:root` |
-| `assets/` | Logo, the five photographs from the mockup, and five abstract fields |
+| `assets/` | Logo, the five photographs from the mockup, five abstract fields, and Dr. Candy Ellis' portrait |
 
 ## How this maps to the mockup
 
@@ -100,6 +101,48 @@ duplicated across the ten HTML files rather than templated. Editing one means
 editing all of them — they were generated together and are byte-identical apart
 from the current-page `aria-current` and the `../` prefixes on subpage links.
 
+## About
+
+`about/index.html` is the About page, moved across from
+`https://carl641.github.io/theresetstudio/about/` — the `src/pages/about.astro`
+page of the `carl641/theresetstudio` Astro site. Every word is lifted verbatim:
+the hero, the four story paragraphs, the "Why we exist" band, the five
+principles, and Dr. Ellis' three-paragraph biography with her four credentials.
+The two interpolated values are resolved to the strings the source site renders
+from `src/data/site.ts` — the signature line under "Why we exist" is
+`site.tagline`, and the practice named in the last biography paragraph is
+`site.clinicalEntity`.
+
+**Translated to this site's chrome, not restyled.** The Astro page ships its own
+scoped CSS; here each block maps onto a pattern the site already had:
+
+- The `PageHero` becomes `.page-hero` in a new `--solo` variant — the modality
+  heroes carry a photograph beside the copy, this one is copy alone
+- The story and practitioner sections are `.about-split`, a grid of `.prose`
+  against a framed image, sharing the prose measures and the 4/5 frame used
+  everywhere else
+- The numbered principles reuse `.steps` / `.step` from the modality pages,
+  which already number their items with `decimal-leading-zero` in tan. The
+  "Our Philosophy" eyebrow above them is this site's own section pattern, and
+  the only label on the page that is not from the source
+- The `CtaBand` becomes the site's own `.cta-band`, rings and all
+- Only "Why we exist" is new: a sage band set left rather than centred, so it
+  reads as a statement instead of another promise band
+
+**The portrait.** `assets/drcandy.jpeg` is the photograph of Dr. Ellis that was
+uploaded to the repository; it fills what was a `portrait-placeholder.webp` slot
+on the source page. It is a 3648×5472 camera original at 4 MB, so the page
+loads `assets/dr-candy-ellis.webp` — the same photograph at 1200×1800, which is
+twice the width the 4/5 frame ever renders. Re-encoding also drops the EXIF
+block, which carried GPS coordinates. The original stays in `assets/` as the
+master; regenerate the WebP from it if the crop or the frame ever changes. The
+story section keeps the abstract light field the source page had there
+(`assets/about-story.webp`), on the same terms as the modality placeholders: it
+is decorative, carries an empty `alt`, and wants a real photograph.
+
+**Navigation.** "About" is now the first item in the header nav and the first
+link in the footer's Explore column, on all eleven pages.
+
 ## Before launch
 
 Placeholder content carried over from the mockup: the address, hours and email
@@ -107,6 +150,13 @@ in the footer, and every `href="#"` (all "Book Your Reset" / "Book a Reset"
 buttons, the per-modality "Book …" buttons, "Explore Membership", "Plan your
 first visit", "Membership"). The photographs are stock imagery from the mockup
 and should be replaced with the studio's own.
+
+The About page adds three more of those. "Chiropractic consultation", "All
+chiropractic services" and "What to expect" point at `/services/…` and
+`/first-visit/` on the source site, and this site has neither chiropractic
+content nor a first-visit page, so they carry `href="#"` rather than a link that
+would 404. They need either real pages here or an explicit link across to the
+Astro site.
 
 Five modalities have no photograph yet — contrast therapy, Flowpresso®,
 NormaTec®, sound therapy and neuro light therapy. They carry the abstract
