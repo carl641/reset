@@ -101,6 +101,11 @@ address { font-style: normal; }
   100% { transform: rotate(var(--a)) translateX(8px); opacity: 0; }
 }
 
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 @keyframes convergeRing {
   0%   { transform: translate(-50%, -50%) scale(3.2); opacity: 0; }
   18%  { opacity: .38; }
@@ -409,6 +414,71 @@ address { font-style: normal; }
 }
 
 .hero__content .btn { pointer-events: auto; }
+
+/* --------------------------------------------------------------------------
+   Services ticker — a quiet, continuous index of what the studio offers,
+   carrying the eye from the hero into the page.
+   -------------------------------------------------------------------------- */
+.ticker {
+  position: relative;
+  background: var(--sand);
+  border-bottom: 1px solid var(--rule-stone-14);
+  padding: 19px 0;
+}
+
+/* The names run edge to edge, so both ends dissolve rather than being cut off
+   square. The fade sits on this frame rather than on the band, which keeps the
+   sand ground solid from margin to margin, and rather than on the track, which
+   would carry its own fade along as it travels. */
+.ticker__viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* max-content so the track is as wide as both rows laid end to end; the
+   translate below is a percentage of that width. */
+.ticker__track {
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 66s linear infinite;
+}
+
+/* Hover to read a name, focus to tab the row — either one stops the travel. */
+.ticker:hover .ticker__track,
+.ticker:focus-within .ticker__track { animation-play-state: paused; }
+
+.ticker__row {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ticker__item { display: inline-flex; align-items: center; }
+
+/* Every item carries its own trailing diamond, so the seam between the two
+   rows is spaced exactly like every other join. */
+.ticker__item::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin: 0 30px;
+  background: var(--tan);
+  transform: rotate(45deg);
+}
+
+.ticker__item a {
+  display: block;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.ticker__item a:hover { color: var(--sage); }
 
 /* --------------------------------------------------------------------------
    Philosophy
@@ -1821,6 +1891,10 @@ address { font-style: normal; }
   .intro-facts { grid-template-columns: 1fr; gap: 22px; }
   .service__title { font-size: 23px; }
 
+  .ticker { padding: 16px 0; }
+  .ticker__item a { font-size: 11px; letter-spacing: .2em; }
+  .ticker__item::after { margin: 0 20px; }
+
   /* Let the hero grow with its copy instead of holding 82vh. `relative`, not
      `static` — the ground and rings are absolute and would paint over
      unpositioned in-flow content. */
@@ -1859,4 +1933,17 @@ address { font-style: normal; }
   .promise__ring--1,
   .promise__ring--2,
   .promise__ring--3 { display: none; }
+
+  /* A stopped marquee is a row cut off mid-name at both ends, so the names
+     wrap into a settled, centred index instead. Nothing is clipped, so the
+     edge fade goes with it; the second copy exists only for the loop. */
+  .ticker { padding: 26px var(--gutter); }
+  .ticker__viewport {
+    overflow: visible;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .ticker__track { animation: none; transform: none; width: auto; }
+  .ticker__row { flex-wrap: wrap; justify-content: center; row-gap: 14px; }
+  .ticker__row + .ticker__row { display: none; }
 }
