@@ -1,7 +1,7 @@
 # The Reset Studio
 
 A static implementation of the Claude Design mockup `Reset Studio Homepage.dc.html`,
-plus the Modalities section built on top of it.
+plus the Services section built on top of it.
 
 No build step, no dependencies. Open `index.html`, or serve the folder:
 
@@ -15,13 +15,13 @@ npx http-server -p 8080
 | --- | --- |
 | `index.html` | The home page — semantic markup, one section per block of the mockup |
 | `about/index.html` | The About page — the story, the philosophy, and Dr. Candy Ellis |
-| `modalities/index.html` | The Modalities listing — all eight modalities as cards |
-| `modalities/<slug>.html` | One page per modality |
+| `services/index.html` | The Services page — both categories, all fourteen services as cards |
+| `services/<slug>.html` | One page per service |
 | `first-visit/index.html` | The First Visit page — how a first visit goes, how to prepare, and the FAQs |
 | `memberships/index.html` | The Memberships page — the two tiers, packages and gift cards |
 | `booking.js` | The Boulevard self-booking overlay — loads the injector and opens it from every booking button |
 | `styles.css` | All styling for every page. Palette, type and layout tokens live in `:root` |
-| `assets/` | Logo, the five photographs from the mockup, five abstract fields, and Dr. Candy Ellis' portrait |
+| `assets/` | Logo, the five photographs from the mockup, eleven abstract fields, and Dr. Candy Ellis' portrait |
 
 ## How this maps to the mockup
 
@@ -52,7 +52,7 @@ needed to ship the design, so it was translated rather than copied:
 
 The five ambient animations are reproduced exactly: `breatheRing` on the hero
 rings, `hoverWave` on the Relax/Refresh/Renew columns, `convergeLine` on the
-modalities band, `convergeRing` on the promise band.
+services band, `convergeRing` on the promise band.
 
 ## Deliberate additions
 
@@ -69,38 +69,59 @@ The mockup is a fixed desktop composition. Three things were added on top of it:
   and a hover colour on the footer links — the one visible departure from the
   mockup, where inline styles left those links with no hover feedback at all.
 
-## Modalities
+## Services
 
-Eight modality pages sit under `modalities/`, in the order they appear in the
-menu: Contrast Therapy, Infrared Sauna, Cold Plunge, Red Light Therapy,
-Flowpresso® Therapy, NormaTec® Compression, Sound Therapy, Neuro Light Therapy.
+Fourteen service pages sit under `services/`, in two categories.
+
+**Wellness & Recovery** — Contrast Therapy, Infrared Sauna, Cold Plunge, Red
+Light Therapy, Flowpresso® Therapy, NormaTec® Compression, Sound Therapy, Neuro
+Light Therapy. These were the site's "Modalities". The word is gone: the source
+catalogue calls the category Wellness and Recovery, the service pages already
+said so in their `Category` fact row, and the site now says it everywhere —
+header panel, footer column, breadcrumb, home page band and the listing itself.
+
+**Chiropractic Care** — Chiropractic Consultation, Chiropractic Adjustments, Dry
+Needling, Spinal Decompression, Electrical Stimulation, Therapeutic Ultrasound.
+Provided by `Dr. Candy, LLC`, an independent practice operating within the
+studio, which is why these pages carry a `Provided by` fact and the footer
+carries the attribution and disclaimer.
 
 **Where the copy comes from.** Every word on these pages — taglines, summaries,
 session lengths, equipment notes, the narrative, the benefit list, the "commonly
 booked for" tags and the three-step session walkthrough — is lifted verbatim
-from the eight Wellness and Recovery services in `src/data/services.ts` of the
+from the fourteen services in `src/data/services.ts` of the
 `carl641/theresetstudio` Astro site. Nothing was rewritten or invented. The
-chiropractic services in that catalogue are deliberately not included here; the
-`pairsWith` rails were filtered to the eight modalities that exist on this site.
+`pairsWith` rails are no longer filtered, so Contrast Therapy and NormaTec®
+Compression regained the Chiropractic Adjustments card the catalogue pairs them
+with.
 
 **Page shape**, following the source site's own information architecture:
 
-1. Hero — breadcrumb, name, tagline, summary, a `Session / Equipment / Category`
-   fact row and a booking button
+1. Hero — breadcrumb, name, tagline, summary, a
+   `Session / Equipment or Provided by / Category` fact row and a booking button
 2. `What it is` — the two intro paragraphs, with `What it supports` and
    `Commonly booked for` in a rail alongside
 3. `What the session is like` — the three-step walkthrough, numbered
 4. `Booked in the same visit as` — the `pairsWith` cards
 5. A sage CTA band reusing the promise band's rings
 
-**Navigation.** "Modalities" in the header is a link to `modalities/` that
-reveals a panel of all eight on hover or keyboard focus. There is no JavaScript:
-the trigger is a real link, so a tap or a click always lands on the listing page,
-and below 900px the panel is dropped and the link alone carries the menu. The
-footer gained a Modalities column on every page.
+**The listing page** at `services/` is the source site's `/services/` page
+mapped onto patterns this site already had: the tan converging-lines band for
+the hero (with a three-fact row added for the two category counts and the
+clinical entity), the sand `.services` grid for Wellness & Recovery, the About
+page's sage `.why` band to introduce Chiropractic Care and its attribution, the
+same grid again on cream for the six chiropractic cards, and the memberships
+page's `.pk` cards for the three combinations people actually book together.
+
+**Navigation.** "Services" in the header is a link to `services/` that reveals a
+panel of both categories side by side on hover or keyboard focus. There is no
+JavaScript: the trigger is a real link, so a tap or a click always lands on the
+listing page, and below 900px the panel is dropped and the link alone carries
+the menu. The footer carries a column per category, and a legal line naming the
+practice that provides chiropractic care.
 
 **No build step, but shared chrome.** The header, footer and CTA band are
-duplicated across the thirteen HTML files rather than templated. Editing one means
+duplicated across the nineteen HTML files rather than templated. Editing one means
 editing all of them — they were generated together and are byte-identical apart
 from the current-page `aria-current` and the `../` prefixes on subpage links.
 
@@ -119,12 +140,12 @@ from `src/data/site.ts` — the signature line under "Why we exist" is
 **Translated to this site's chrome, not restyled.** The Astro page ships its own
 scoped CSS; here each block maps onto a pattern the site already had:
 
-- The `PageHero` becomes `.page-hero` in a new `--solo` variant — the modality
+- The `PageHero` becomes `.page-hero` in a new `--solo` variant — the service
   heroes carry a photograph beside the copy, this one is copy alone
 - The story and practitioner sections are `.about-split`, a grid of `.prose`
   against a framed image, sharing the prose measures and the 4/5 frame used
   everywhere else
-- The numbered principles reuse `.steps` / `.step` from the modality pages,
+- The numbered principles reuse `.steps` / `.step` from the service pages,
   which already number their items with `decimal-leading-zero` in tan. The
   "Our Philosophy" eyebrow above them is this site's own section pattern, and
   the only label on the page that is not from the source
@@ -140,11 +161,11 @@ twice the width the 4/5 frame ever renders. Re-encoding also drops the EXIF
 block, which carried GPS coordinates. The original stays in `assets/` as the
 master; regenerate the WebP from it if the crop or the frame ever changes. The
 story section keeps the abstract light field the source page had there
-(`assets/about-story.webp`), on the same terms as the modality placeholders: it
+(`assets/about-story.webp`), on the same terms as the service placeholders: it
 is decorative, carries an empty `alt`, and wants a real photograph.
 
 **Navigation.** "About" is now the first item in the header nav and the first
-link in the footer's Explore column, on all thirteen pages.
+link in the footer's Explore column, on all nineteen pages.
 
 ## First Visit
 
@@ -159,7 +180,7 @@ screening paragraph, and all twenty questions across their five groups.
 **Mapped onto patterns the site already had**, rather than restyled:
 
 - The `PageHero` is `.page-hero--solo`, as on the About page
-- The four moments reuse `.steps` / `.step` from the modality pages in a
+- The four moments reuse `.steps` / `.step` from the service pages in a
   `--plain` variant on cream. `.steps__list--timed` swaps the leading-zero
   counter for the moment in the visit, so the two-column rhythm is unchanged
 - The preparation lists are new `.prep` cards on the sand band, and each list is
@@ -168,7 +189,7 @@ screening paragraph, and all twenty questions across their five groups.
   and every answer stays in the page for search and for find-on-page. The
   chevron is a rotated border corner
 - The `CtaBand` is the site's `.cta-band`. The source's secondary "View services"
-  button points at the Modalities listing, which is this site's equivalent
+  button points at the Services listing, which is this site's equivalent
 
 The source page also emits `FAQPage` structured data. No page on this site
 carries JSON-LD yet, so it was left out rather than added in isolation.
@@ -210,7 +231,7 @@ Every booking button on the site opens the Boulevard self-booking overlay.
 `booking.js` loads Boulevard's injector once per page, calls `blvd.init()` with
 the studio's `businessId`, and opens the overlay from any element carrying
 `data-blvd-book` — the header's "Book a Reset", the hero and CTA-band buttons,
-the per-modality "Book …" buttons, both membership tier buttons, and the About
+the per-service "Book …" buttons, both membership tier buttons, and the About
 page's "Chiropractic consultation". Adding a booking button anywhere else is one
 attribute; nothing needs registering.
 
@@ -223,8 +244,8 @@ Boulevard can open the overlay directly on a service or category rather than at
 the menu. `booking.js` supports that through two optional attributes on any
 booking button — `data-blvd-path` and `data-blvd-visit-type`, which become
 Boulevard's `urlParams` — but neither is set anywhere yet, because the service
-ids come out of the Boulevard dashboard. Filling them in on the eight modality
-pages would send each "Book <modality>" button straight to that service.
+ids come out of the Boulevard dashboard. Filling them in on the fourteen service
+pages would send each "Book <service>" button straight to that service.
 
 ## Before launch
 
@@ -234,24 +255,21 @@ contact page, which this site does not have, and Boulevard sells gift cards
 through a separate hosted page rather than the booking overlay. The photographs are stock imagery from the
 mockup and should be replaced with the studio's own.
 
-The About page adds one more. "All chiropractic services" points at
-`/services/…` on the source site, and this site has no chiropractic content, so
-it carries `href="#"` rather than a link that would 404. It needs either a real
-page here or an explicit link across to the Astro site. (Of the three links that
-started out that way, "What to expect" now points at First Visit and
-"Chiropractic consultation" opens the booking overlay.)
-
 The two membership prices are unconfirmed — see the Memberships section above.
 
-Five modalities have no photograph yet — contrast therapy, Flowpresso®,
-NormaTec®, sound therapy and neuro light therapy. They carry the abstract
-light-field placeholders the source site generates for the same purpose
-(`assets/contrast-therapy.webp`, `flowpresso.webp`, `normatec-compression.webp`,
-`sound-therapy.webp`, `neuro-light-therapy.webp`), which are tuned to this
-palette and deliberately do not pretend to be photographs of a room that has not
-been shot. They keep an empty `alt` because they are decorative; a real
-photograph dropped in at the same path needs a real `alt` written for it. The
-source site's own equipment photography is on a CDN this build could not reach.
+Eleven services have no photograph yet: contrast therapy, Flowpresso®,
+NormaTec®, sound therapy, neuro light therapy, and all six chiropractic
+services. They carry the abstract light-field placeholders the source site
+generates for the same purpose, named after their slug in `assets/`, which are
+tuned to this palette and deliberately do not pretend to be photographs of a
+room that has not been shot. They keep an empty `alt` because they are
+decorative; a real photograph dropped in at the same path needs a real `alt`
+written for it. The source site's own equipment photography is on a CDN this
+build could not reach.
+
+The source catalogue gives therapeutic ultrasound the same placeholder as
+NormaTec®; this site uses `field-slate` for it instead, so no two cards on the
+services page carry the same image.
 
 Session lengths came across from the source catalogue, where they are noted as
 typical lengths pending the studio's booking grid. Confirm them before launch.
