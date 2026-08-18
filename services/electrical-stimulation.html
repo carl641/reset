@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="../styles.css">
 <script src="../booking.js" defer></script>
+<script src="../nav.js" defer></script>
 </head>
 <body>
 
@@ -21,10 +22,18 @@
     <a class="site-header__brand" href="../" aria-label="The Reset Studio &mdash; home">
       <img src="../assets/logo.png" width="1848" height="507" alt="The Reset Studio">
     </a>
-    <nav class="site-nav" aria-label="Primary">
+    <button class="nav-toggle" type="button" id="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+      <span class="nav-toggle__box" aria-hidden="true">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="../about/">About</a>
       <div class="nav-drop">
         <a class="nav-drop__link" href="./">Services</a>
+        <button class="nav-drop__toggle" type="button" aria-expanded="false" aria-label="Show services menu"><span aria-hidden="true"></span></button>
         <div class="nav-drop__panel nav-drop__panel--wide">
           <div class="nav-drop__groups">
           <div class="nav-drop__group">
