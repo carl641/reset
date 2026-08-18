@@ -15,7 +15,7 @@
   --stone:      #707067;  /* muted copy, link base, hero + footer ground */
   --sage:       #868776;  /* primary action, promise band */
   --sage-dark:  #6f7061;  /* primary action hover */
-  --tan:        #c9ad93;  /* eyebrows, rules, modality band */
+  --tan:        #c9ad93;  /* eyebrows, rules, service band */
   --bark:       #40372e;  /* copy on the tan band */
   --spark:      #fffdf8;  /* head of the converging lines */
 
@@ -113,7 +113,7 @@ address { font-style: normal; }
 .shell,
 .site-header__inner,
 .triad__inner,
-.modalities__inner,
+.services__inner,
 .site-footer__inner {
   max-width: var(--shell);
   margin: 0 auto;
@@ -192,9 +192,9 @@ address { font-style: normal; }
 .site-nav a { white-space: nowrap; }
 
 /* --------------------------------------------------------------------------
-   Modalities dropdown
+   Services dropdown
 
-   No JavaScript: the trigger is a real link to the modalities index, so a tap
+   No JavaScript: the trigger is a real link to the services index, so a tap
    or a click always lands somewhere useful, and the panel is revealed by
    :hover / :focus-within for pointer and keyboard. Below 900px the panel is
    dropped entirely and the link alone carries the menu.
@@ -249,12 +249,29 @@ address { font-style: normal; }
 .nav-drop__list a { display: block; font-size: 12px; letter-spacing: .16em; }
 .nav-drop__list a[aria-current="page"] { color: var(--sage); }
 
+/* Two columns sized to their longest label: the service names are set in
+   letter-spaced caps and cannot reflow, so equal fractions would overflow. */
+.nav-drop__panel--wide { min-width: 0; }
+
+.nav-drop__groups {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 34px;
+}
+
+.nav-drop__group .nav-drop__heading { margin-bottom: 14px; }
+
 .nav-drop__all {
-  margin-top: 5px;
+  margin: 20px 0 0;
   padding-top: 15px;
   border-top: 1px solid var(--rule-stone-14);
 }
-.nav-drop__all a { color: var(--tan); }
+.nav-drop__all a {
+  display: block;
+  font-size: 12px;
+  letter-spacing: .16em;
+  color: var(--tan);
+}
 .nav-drop__all a:hover { color: var(--sage); }
 
 /* --------------------------------------------------------------------------
@@ -448,9 +465,9 @@ address { font-style: normal; }
 .split__actions { display: flex; gap: 18px; flex-wrap: wrap; }
 
 /* --------------------------------------------------------------------------
-   Modalities intro (converging lines)
+   Services intro (converging lines)
    -------------------------------------------------------------------------- */
-.modalities-intro {
+.services-intro {
   position: relative;
   overflow: hidden;
   background: var(--tan);
@@ -461,6 +478,26 @@ address { font-style: normal; }
   text-align: center;
   gap: 22px;
 }
+
+.intro-facts {
+  position: relative;
+  margin: 20px 0 0;
+  padding-top: 30px;
+  border-top: 1px solid rgba(64, 55, 46, .18);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px 56px;
+  text-align: center;
+}
+.intro-facts dt {
+  font-size: 10.5px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--bark);
+  opacity: .72;
+}
+.intro-facts dd { margin: 9px 0 0; font-size: 14.5px; color: var(--ink); }
 
 .converge { position: absolute; inset: 0; pointer-events: none; }
 
@@ -493,11 +530,11 @@ address { font-style: normal; }
 .converge__line--5 { --a:  65deg; animation-delay: -16s; }
 .converge__line--6 { --a: 115deg; animation-delay: -20s; }
 
-.modalities-intro > .kicker,
-.modalities-intro__title,
-.modalities-intro__copy { position: relative; }
+.services-intro > .kicker,
+.services-intro__title,
+.services-intro__copy { position: relative; }
 
-.modalities-intro__title {
+.services-intro__title {
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: clamp(34px, 3.4vw, 46px);
@@ -506,7 +543,7 @@ address { font-style: normal; }
   margin: 0;
 }
 
-.modalities-intro__copy {
+.services-intro__copy {
   font-size: 16.5px;
   font-weight: 400;
   line-height: 1.8;
@@ -516,27 +553,49 @@ address { font-style: normal; }
 }
 
 /* --------------------------------------------------------------------------
-   Modalities grid
+   Services grid
    -------------------------------------------------------------------------- */
-.modalities {
+.services {
   background: var(--sand);
   border-top: 1px solid var(--rule-stone-14);
 }
 
-.modalities__inner { padding: 110px var(--gutter) 130px; }
+.services__inner { padding: 110px var(--gutter) 130px; }
 
-.modalities__grid {
+/* The listing page introduces each category above its grid. The home page
+   band has no head, so this only ever renders on services/. */
+.services--cream { background: var(--cream); border-top: none; }
+
+.services__head { margin-bottom: 62px; max-width: 62ch; }
+
+.services__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(28px, 2.8vw, 38px);
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.services__copy {
+  margin: 18px 0 0;
+  font-size: 16.5px;
+  line-height: 1.85;
+  color: var(--stone);
+}
+
+.services__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px 32px;
 }
 
-.modality { display: flex; flex-direction: column; gap: 18px; }
+.service { display: flex; flex-direction: column; gap: 18px; }
 
-.modality__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
-.modality__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.service__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.service__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
-.modality__title {
+.service__title {
   font-family: var(--font-serif);
   font-size: 26px;
   font-weight: 500;
@@ -544,7 +603,7 @@ address { font-style: normal; }
   margin: 0;
 }
 
-.modality__copy {
+.service__copy {
   margin: 0;
   font-size: 14.5px;
   font-weight: 400;
@@ -552,7 +611,7 @@ address { font-style: normal; }
   color: var(--stone);
 }
 
-.modality__meta {
+.service__meta {
   margin: 0;
   font-size: 11px;
   letter-spacing: .24em;
@@ -560,18 +619,18 @@ address { font-style: normal; }
   color: var(--tan);
 }
 
-.modalities__action { display: flex; justify-content: center; margin-top: 64px; }
+.services__action { display: flex; justify-content: center; margin-top: 64px; }
 
-/* A whole card as a link — used on the modality pages and the index. */
-.modality--link { color: inherit; }
-.modality--link:hover { color: inherit; }
-.modality__title { transition: color .2s; }
-.modality--link .modality__media img { transition: transform .8s ease; }
-.modality--link:hover .modality__media img { transform: scale(1.04); }
-.modality--link:hover .modality__title { color: var(--sage); }
+/* A whole card as a link — used on the service pages and the index. */
+.service--link { color: inherit; }
+.service--link:hover { color: inherit; }
+.service__title { transition: color .2s; }
+.service--link .service__media img { transition: transform .8s ease; }
+.service--link:hover .service__media img { transform: scale(1.04); }
+.service--link:hover .service__title { color: var(--sage); }
 
 @media (prefers-reduced-motion: reduce) {
-  .modality--link:hover .modality__media img { transform: none; }
+  .service--link:hover .service__media img { transform: none; }
 }
 
 /* --------------------------------------------------------------------------
@@ -627,7 +686,7 @@ address { font-style: normal; }
 }
 
 /* --------------------------------------------------------------------------
-   Modality pages — hero
+   Service pages — hero
    -------------------------------------------------------------------------- */
 .page-hero {
   max-width: var(--shell);
@@ -706,7 +765,7 @@ address { font-style: normal; }
 .page-hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
 /* --------------------------------------------------------------------------
-   Modality pages — narrative and outcomes rail
+   Service pages — narrative and outcomes rail
    -------------------------------------------------------------------------- */
 .detail {
   max-width: var(--shell);
@@ -786,7 +845,7 @@ address { font-style: normal; }
 }
 
 /* --------------------------------------------------------------------------
-   Modality pages — what the session is like
+   Service pages — what the session is like
    -------------------------------------------------------------------------- */
 .steps {
   background: var(--sand);
@@ -851,7 +910,7 @@ address { font-style: normal; }
 }
 
 /* --------------------------------------------------------------------------
-   Modality pages — pairs with
+   Service pages — pairs with
    -------------------------------------------------------------------------- */
 .related__inner { max-width: var(--shell); margin: 0 auto; padding: 100px var(--gutter) 116px; }
 
@@ -932,7 +991,7 @@ address { font-style: normal; }
    About page
    -------------------------------------------------------------------------- */
 
-/* The modality hero carries a photograph alongside its copy; the about hero
+/* The service hero carries a photograph alongside its copy; the about hero
    is copy alone, so it takes the full shell and its measures open up. */
 .page-hero--solo .page-hero__inner { grid-template-columns: 1fr; }
 .page-hero--solo .page-hero__title { max-width: 20ch; }
@@ -1009,6 +1068,14 @@ address { font-style: normal; }
 
 .why__eyebrow { margin: 0; }
 
+/* On services/ the band opens with its heading rather than an eyebrow. */
+.why__lead:first-child { margin-top: 0; }
+
+.why__action { margin: 40px 0 0; }
+
+.link-underline--cream { color: var(--cream); border-bottom-color: var(--sand-70); }
+.link-underline--cream:hover { color: var(--sand); }
+
 .why__lead {
   margin: 28px 0 0;
   font-family: var(--font-serif);
@@ -1052,8 +1119,8 @@ address { font-style: normal; }
 
 .site-footer__top {
   display: grid;
-  grid-template-columns: 1.7fr 1fr 1fr 1fr;
-  gap: 56px;
+  grid-template-columns: 1.35fr repeat(4, 1fr);
+  gap: 40px;
   align-items: start;
 }
 
@@ -1074,6 +1141,7 @@ address { font-style: normal; }
 
 .site-footer__tagline {
   margin: 0;
+  white-space: nowrap;
   font-size: 13px;
   letter-spacing: .3em;
   text-transform: uppercase;
@@ -1094,10 +1162,21 @@ address { font-style: normal; }
 
 .site-footer__col .site-footer__heading {
   font-size: 11px;
+  line-height: 1.5;
   letter-spacing: .28em;
   text-transform: uppercase;
   color: var(--tan);
   margin: 0 0 4px;
+  min-height: 3em;
+}
+
+.site-footer__legal {
+  margin: 0;
+  max-width: 92ch;
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--sand-70);
 }
 
 .site-footer__bottom {
@@ -1115,7 +1194,7 @@ address { font-style: normal; }
 /* --------------------------------------------------------------------------
    First visit — how the visit goes
 
-   The arc of a visit reuses the modality pages' step rows. The counter is
+   The arc of a visit reuses the service pages' step rows. The counter is
    swapped for the moment in the visit, so the two-column rhythm carries over
    unchanged and only the label in the left column is new.
    -------------------------------------------------------------------------- */
@@ -1398,6 +1477,8 @@ address { font-style: normal; }
 }
 
 /* --- Packages ------------------------------------------------------------- */
+.packages--sand { background: var(--sand); border-top: 1px solid var(--rule-stone-14); }
+
 .packages__inner { max-width: var(--shell); margin: 0 auto; padding: 100px var(--gutter); }
 
 .packages__title {
@@ -1510,8 +1591,9 @@ address { font-style: normal; }
   .tiers__grid { grid-template-columns: 1fr; gap: 28px; }
   .tier--lift { margin-top: 0; }
 
-  .site-footer__top { grid-template-columns: 1fr 1fr; gap: 48px; }
+  .site-footer__top { grid-template-columns: repeat(2, 1fr); gap: 48px 40px; }
   .site-footer__brand { grid-column: 1 / -1; }
+  .site-footer__col .site-footer__heading { min-height: 0; }
 }
 
 @media (max-width: 900px) {
@@ -1534,12 +1616,14 @@ address { font-style: normal; }
     padding: 72px var(--gutter);
   }
 
-  .modalities__grid { grid-template-columns: 1fr; gap: 48px; }
-  .modalities__inner { padding: 80px var(--gutter) 96px; }
-  .modalities__action { margin-top: 48px; }
+  .services__grid { grid-template-columns: 1fr; gap: 48px; }
+  .services__head { margin-bottom: 44px; }
+  .intro-facts { gap: 20px 34px; }
+  .services__inner { padding: 80px var(--gutter) 96px; }
+  .services__action { margin-top: 48px; }
 
   .philosophy { padding: 96px 24px 88px; }
-  .modalities-intro { padding: 110px 24px 88px; }
+  .services-intro { padding: 110px 24px 88px; }
   .promise { padding: 96px 24px; }
   .why { padding: 88px 24px; }
 
