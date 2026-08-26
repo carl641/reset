@@ -3,7 +3,7 @@
    Desktop keeps the CSS-only hover dropdown untouched. Below the header
    breakpoint the same markup becomes a hamburger drawer: the toggle opens the
    nav panel, and the Services group gets its own disclosure button so the
-   fourteen service links stay reachable without leaving the drawer.
+   fifteen service links stay reachable without leaving the drawer.
 
    The breakpoint lives in one place here and must stay in step with the
    900px step in styles.css. */
