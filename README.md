@@ -15,10 +15,11 @@ npx http-server -p 8080
 | --- | --- |
 | `index.html` | The home page — semantic markup, one section per block of the mockup |
 | `about/index.html` | The About page — the story, the philosophy, and Dr. Candy Ellis |
-| `services/index.html` | The Services page — both categories, all fourteen services as cards |
+| `services/index.html` | The Services page — both categories, all fifteen services as cards, and Together pricing |
 | `services/<slug>.html` | One page per service |
 | `first-visit/index.html` | The First Visit page — how a first visit goes, how to prepare, and the FAQs |
-| `memberships/index.html` | The Memberships page — the two tiers, packages and gift cards |
+| `memberships/index.html` | The Memberships page — the three tiers, founding memberships and gift cards |
+| `policies/cancellation.html` | The cancellation and no-show policy, linked from every footer |
 | `booking.js` | The Boulevard self-booking overlay — loads the injector and opens it from every booking button |
 | `styles.css` | All styling for every page. Palette, type and layout tokens live in `:root` |
 | `assets/` | Logo, the five photographs from the mockup, eleven abstract fields, and Dr. Candy Ellis' portrait |
@@ -71,11 +72,12 @@ The mockup is a fixed desktop composition. Three things were added on top of it:
 
 ## Services
 
-Fourteen service pages sit under `services/`, in two categories.
+Fifteen services sit under `services/`, in two categories.
 
-**Wellness & Recovery** — Contrast Therapy, Infrared Sauna, Cold Plunge, Red
-Light Therapy, Flowpresso® Therapy, NormaTec® Compression, Sound Therapy, Neuro
-Light Therapy. These were the site's "Modalities". The word is gone: the source
+**Wellness & Recovery** — Contrast Therapy, Infrared Sauna, SaunaDome + PEMF,
+Red Light Therapy, Flowpresso® Therapy, NormaTec® Compression, Zenthesia
+Vibroacoustic, Stretch + Breath Reset, Reset Roadmap with Dr. Candy. These were
+the site's "Modalities". The word is gone: the source
 catalogue calls the category Wellness and Recovery, the service pages already
 said so in their `Category` fact row, and the site now says it everywhere —
 header panel, footer column, breadcrumb, home page band and the listing itself.
@@ -86,14 +88,46 @@ Provided by `Dr. Candy, LLC`, an independent practice operating within the
 studio, which is why these pages carry a `Provided by` fact and the footer
 carries the attribution and disclaimer.
 
-**Where the copy comes from.** Every word on these pages — taglines, summaries,
-session lengths, equipment notes, the narrative, the benefit list, the "commonly
-booked for" tags and the three-step session walkthrough — is lifted verbatim
-from the fourteen services in `src/data/services.ts` of the
-`carl641/theresetstudio` Astro site. Nothing was rewritten or invented. The
-`pairsWith` rails are no longer filtered, so Contrast Therapy and NormaTec®
-Compression regained the Chiropractic Adjustments card the catalogue pairs them
-with.
+**Two pages are delisted rather than deleted.** `cold-plunge.html` and
+`neuro-light-therapy.html` are off the nav, the footer, the ticker and every
+card grid, because neither launches as a standalone bookable service. The cold
+plunge is part of Contrast Therapy; neurological light is an optional
+enhancement to Zenthesia Vibroacoustic, folded into that page as its own block.
+Both files stay live and reframed, so any link already in the wild still lands
+somewhere honest and points at the service the content moved into. Neither page
+carries a booking button any more.
+
+**Durations and prices** live in three places that have to agree: the `.facts`
+block on the detail page, the `.service__meta` line on every card that links to
+it, and the Together table on the services page. `scratchpad`-style one-off
+scripts are how the card copy was last normalized across all of them; the
+canonical values are the launch menu below.
+
+| Service | Duration | Single | Together |
+| --- | --- | --- | --- |
+| NormaTec® Compression | 30 min | $45 | 2 — $90 · 3 — $135 |
+| Full-Body Red Light | 20 min | $45 | 2 — $69 |
+| Infrared Sauna | 30 min | $49 | 2 — $69 · 3 — $89 · 4 — $109 |
+| SaunaDome + PEMF | 30 min | $59 | 2 — $99 |
+| Zenthesia Vibroacoustic | 30 min | $59 | 2 — $89 |
+| Contrast Therapy | ~45 min | $79 | 2 — $119 |
+| Flowpresso® | 40 min | $89 | — |
+| Stretch + Breath Reset | 15 min | $45 | — |
+| Reset Roadmap with Dr. Candy | 30 min | $79 | — |
+
+Together is for guests who chose to come in with each other. Nothing on the site
+should imply strangers are placed in a private room together, and compression is
+a room of three loungers rather than a single-guest space.
+
+**Where the copy comes from.** Most of these pages — taglines, summaries,
+equipment notes, the narrative, the benefit list, the "commonly booked for" tags
+and the three-step session walkthrough — came verbatim from
+`src/data/services.ts` of the `carl641/theresetstudio` Astro site. The launch
+edits since then rewrote durations, prices, the Zenthesia rename and the
+wellness claims, and `saunadome-pemf.html`, `stretch-breath-reset.html` and
+`reset-roadmap.html` are new pages built on the same template. Wellness copy
+uses *supports* / *may help* / *designed for* / *commonly used for*, and avoids
+cure, fix and guarantee language.
 
 **Page shape**, following the source site's own information architecture:
 
@@ -199,23 +233,33 @@ carries JSON-LD yet, so it was left out rather than added in isolation.
 `memberships/index.html` is moved across from
 `https://carl641.github.io/theresetstudio/memberships/` — the
 `src/pages/memberships.astro` page, with its content from
-`src/data/memberships.ts`. Verbatim again: both tiers with their positioning and
-inclusions, the pause-and-attribution note, the four membership benefits, the
-three packages and the gift card paragraph.
+`src/data/memberships.ts`. The tier section has since been rebuilt for launch;
+the benefits grid and the gift card paragraph are still the source page's.
 
-- The two tiers are a new `.tiers` grid. The higher tier is `.tier--lift`: the
-  sage band from elsewhere on the site, raised 36px above its neighbour, exactly
-  as the source page raises it. Stacked below 1040px the offset is dropped
+- The three tiers are a `.tiers` grid. The middle tier is `.tier--lift`: the
+  sage band from elsewhere on the site, raised 36px above its neighbours, as the
+  source page raised its higher tier. Cards give up padding at 1180px and the
+  grid stacks at 1040px, where the offset is dropped
 - Tier inclusions are `.rail__list` again; on the sage card the tan dash and
   stone copy fall away, so both step up to sand
-- The benefits are a two-column `.benefits` grid on the sand band, packages are
-  `.pk` cards on cream, and gift cards reuse the home page's `.split` band with
-  the sauna-bench photograph
+- Each tier carries a `.tier__founding` line under its price, so the founding
+  benefit reads next to the regular rate rather than as a promo banner
+- The benefits are a two-column `.benefits` grid on the sand band, and gift cards
+  reuse the home page's `.split` band with the sauna-bench photograph
 - The `CtaBand` is `.cta-band`, its secondary button pointing at First Visit
 
-**Pricing is a placeholder.** `$189` and `$329` are the numbers the source data
-file carries, and it marks them as unconfirmed. Both need checking against the
-booking system before launch; the HTML says so at the tier block.
+**The launch tiers** are RESET 4 at $199, RESET 8 at $299 and RESET 16 at $479
+per month, all on a six-month commitment, with unused included visits rolling
+over for thirty days and no further. RESET 16 is the high-frequency tier and is
+explicitly not unlimited. Chiropractic care is not included in any membership —
+it is separate clinical care on its own booking path — and the session bundles
+that used to sit below the tiers are gone.
+
+**Founding memberships** are framed as exclusivity rather than a sale: the first
+fifty members only, presented as two benefit lines (15% off the first six months,
+or 25% off paid in full) rather than a percentage banner. The `.founding` band
+appears on both the home page and the memberships page, and both state that
+membership continues at the regular rate after the six-month founding period.
 
 **Navigation.** "First Visit" and "Membership" join the header nav and the
 footer's Explore column on every page. "The Experience" and "Visit" have since
@@ -244,22 +288,30 @@ Boulevard can open the overlay directly on a service or category rather than at
 the menu. `booking.js` supports that through two optional attributes on any
 booking button — `data-blvd-path` and `data-blvd-visit-type`, which become
 Boulevard's `urlParams` — but neither is set anywhere yet, because the service
-ids come out of the Boulevard dashboard. Filling them in on the fourteen service
-pages would send each "Book <service>" button straight to that service.
+ids come out of the Boulevard dashboard. Filling them in on the service pages
+would send each "Book <service>" button straight to that service. The Together
+option is priced on the site but still has to be configured as a group visit in
+Boulevard — `data-blvd-visit-type="GROUP_VISIT"` is what those buttons will
+need.
 
 ## Before launch
 
-Placeholder content carried over from the mockup: the address, hours and email
-in the footer, and "Buy a gift card" — the source site points that one at its
-contact page, which this site does not have, and Boulevard sells gift cards
-through a separate hosted page rather than the booking overlay. The photographs are stock imagery from the
-mockup and should be replaced with the studio's own.
+Placeholder content still carried over from the mockup: the hours in the footer,
+and "Buy a gift card" — the source site points that one at its contact page,
+which this site does not have, and Boulevard sells gift cards through a separate
+hosted page rather than the booking overlay. The footer address is now the real
+one: 485 Providence St, Suite 100, Huntsville, AL 35806, in Village of
+Providence. The photographs are stock imagery from the mockup and should be
+replaced with the studio's own.
 
-The two membership prices are unconfirmed — see the Memberships section above.
+Three pages borrow an existing photograph rather than carrying one of their own:
+`saunadome-pemf.html` uses the sauna-bench field, `stretch-breath-reset.html`
+the studio console, and `reset-roadmap.html` the portrait of Dr. Candy in the
+front room. The first two keep an empty `alt` on their cards; all three want
+their own photography.
 
-Eleven services have no photograph yet: contrast therapy, Flowpresso®,
-NormaTec®, sound therapy, neuro light therapy, and all six chiropractic
-services. They carry the abstract light-field placeholders the source site
+Ten services have no photograph of their own: contrast therapy, Flowpresso®,
+NormaTec®, Zenthesia, neurological light, and all six chiropractic services. They carry the abstract light-field placeholders the source site
 generates for the same purpose, named after their slug in `assets/`, which are
 tuned to this palette and deliberately do not pretend to be photographs of a
 room that has not been shot. They keep an empty `alt` because they are
@@ -271,5 +323,10 @@ The source catalogue gives therapeutic ultrasound the same placeholder as
 NormaTec®; this site uses `field-slate` for it instead, so no two cards on the
 services page carry the same image.
 
-Session lengths came across from the source catalogue, where they are noted as
-typical lengths pending the studio's booking grid. Confirm them before launch.
+Session lengths and prices are the launch menu in the Services section above.
+They are set in three places per service — the detail page's `.facts` block, the
+`.service__meta` line on every card linking to it, and the Together table on the
+services page — so a change to one is a change to all three.
+
+Booking buttons still point at `#` and open the Boulevard overlay at its menu;
+that was deliberate and is unchanged by the launch edits.

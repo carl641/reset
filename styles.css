@@ -514,6 +514,77 @@ address { font-style: normal; }
 }
 
 /* --------------------------------------------------------------------------
+   Founding memberships
+
+   Deliberately not a sale band: the two benefits are set as a ruled list in
+   the same register as the rest of the page, with no percentage treatment
+   larger than the copy around it.
+   -------------------------------------------------------------------------- */
+.founding {
+  background: var(--sand);
+  border-top: 1px solid var(--rule-stone-14);
+  border-bottom: 1px solid var(--rule-stone-14);
+}
+
+.founding__inner {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 110px var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.founding__title {
+  margin: 30px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.26;
+  color: var(--ink);
+  max-width: 22ch;
+}
+
+.founding__copy {
+  margin: 28px 0 0;
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--stone);
+  max-width: 54ch;
+}
+
+.founding__list {
+  width: 100%;
+  max-width: 880px;
+  margin: 54px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  text-align: left;
+}
+
+.founding__item {
+  border-top: 1px solid var(--rule-stone-18);
+  padding-top: 26px;
+}
+
+.founding__item dt {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.founding__item dd {
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--stone);
+}
+
+.founding__inner .btn { margin-top: 52px; }
+
+/* --------------------------------------------------------------------------
    Relax / Refresh / Renew
    -------------------------------------------------------------------------- */
 .triad {
@@ -1419,6 +1490,10 @@ address { font-style: normal; }
   color: var(--stone);
 }
 
+/* Policy pages reuse the prep card: a lead paragraph above a list of tiers
+   needs the gap the heading rule already gives the list on its own. */
+.prep__block .step__copy + .rail__list { margin-top: 22px; }
+
 /* The screening paragraph, set quieter than the lists it follows. */
 .prep__note {
   margin: 44px 0 0;
@@ -1492,7 +1567,7 @@ address { font-style: normal; }
 }
 
 /* --------------------------------------------------------------------------
-   Memberships — the two tiers
+   Memberships — the three tiers
    -------------------------------------------------------------------------- */
 .tiers {
   max-width: var(--shell);
@@ -1503,7 +1578,7 @@ address { font-style: normal; }
 
 .tiers__grid {
   display: grid;
-  grid-template-columns: 1fr 1.06fr;
+  grid-template-columns: 1fr 1.06fr 1fr;
   gap: 32px;
   align-items: start;
 }
@@ -1562,6 +1637,14 @@ address { font-style: normal; }
   color: var(--stone);
 }
 
+.tier__founding {
+  margin: 22px 0 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--bark);
+  max-width: 34ch;
+}
+
 .tier .rail__list { margin: 34px 0 40px; flex: 1; }
 .tier .btn { align-self: flex-start; }
 
@@ -1571,6 +1654,7 @@ address { font-style: normal; }
 .tier--lift .tier__amount { color: var(--cream); }
 .tier--lift .tier__position,
 .tier--lift .tier__per,
+.tier--lift .tier__founding,
 .tier--lift .rail__list li { color: var(--sand); }
 .tier--lift .tier__price { border-bottom-color: var(--rule-sand-25); }
 .tier--lift .rail__list li::before { background: var(--sand-70); }
@@ -1662,6 +1746,39 @@ address { font-style: normal; }
   gap: 28px;
 }
 
+/* --- Together pricing ------------------------------------------------------
+   A price list rather than a card grid: two columns of plain rows, ruled the
+   same way the rest of the fine print on the site is. */
+.together {
+  margin: 48px 0 0;
+  border-top: 1px solid var(--rule-stone-18);
+  max-width: 760px;
+}
+
+.together__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 32px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule-stone-18);
+}
+
+.together dt {
+  font-size: 15.5px;
+  color: var(--ink);
+}
+.together dt a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule-stone-18); }
+.together dt a:hover { border-bottom-color: var(--tan); }
+
+.together dd {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: .1em;
+  color: var(--stone);
+}
+
 .pk { border: 1px solid var(--rule-stone-18); padding: 34px 36px; }
 
 .pk__count {
@@ -1705,6 +1822,13 @@ address { font-style: normal; }
    Responsive — the mockup is a desktop composition; these steps fold it down
    without changing the desktop rendering.
    -------------------------------------------------------------------------- */
+/* Three tiers rather than two: the cards give up padding before they give up
+   the row. */
+@media (max-width: 1180px) {
+  .tier { padding: 38px 32px; }
+  .tier__amount { font-size: 38px; }
+}
+
 @media (max-width: 1040px) {
   :root { --gutter: 32px; }
 
@@ -1726,6 +1850,7 @@ address { font-style: normal; }
 
   .detail { padding: 72px var(--gutter) 88px; }
   .detail__inner { grid-template-columns: 1fr; gap: 56px; }
+  .together__row { justify-content: flex-start; }
   .rail {
     border-left: none;
     border-top: 1px solid var(--rule-stone-18);
@@ -1846,7 +1971,7 @@ address { font-style: normal; }
   }
 
   /* Two up rather than one: a full-width 4/5 card is a slab at this width and
-     turns fourteen services into an unreadable amount of scrolling. */
+     turns fifteen services into an unreadable amount of scrolling. */
   .services__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px 28px; }
   .services__head { margin-bottom: 44px; }
   .intro-facts { gap: 20px 28px; }
@@ -1855,6 +1980,9 @@ address { font-style: normal; }
   .services__action { margin-top: 48px; }
 
   .philosophy { padding: 96px 24px 88px; }
+  .founding__inner { padding: 88px 24px; }
+  .founding__list { grid-template-columns: 1fr; gap: 0; }
+  .founding__item + .founding__item { margin-top: 28px; }
   .services-intro { padding: 110px var(--gutter) 88px; }
   .promise { padding: 96px 24px; }
   .why { padding: 88px 24px; }
