@@ -1016,6 +1016,58 @@ address { font-style: normal; }
 }
 .prose p:last-child { margin-bottom: 0; }
 
+/* Story column: a lead, a few emphasised single lines and a closing couplet.
+   They carry the beats of the copy and, stacked on mobile, break what would
+   otherwise be one long block of text. */
+.prose .prose__lead {
+  margin-bottom: 30px;
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 1.9vw, 22px);
+  line-height: 1.62;
+  color: var(--ink);
+  max-width: 42ch;
+}
+
+.prose .prose__line {
+  margin: 34px 0;
+  padding-left: 22px;
+  border-left: 2px solid var(--tan);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 34ch;
+}
+
+.prose__close {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule-stone-18);
+}
+.prose .prose__close p {
+  margin-bottom: 12px;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 36ch;
+}
+.prose .prose__close p:last-child { margin-bottom: 0; font-style: italic; }
+
+/* The independent-practice note sits under the bio as a footnote, not as
+   another paragraph of it. */
+.prose .prose__note {
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule-stone-18);
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--stone);
+  max-width: 62ch;
+}
+.prose .prose__note strong { font-weight: 500; color: var(--ink); }
+
 .rail { border-left: 1px solid var(--rule-stone-18); padding-left: 44px; }
 
 .rail__title {
@@ -1235,6 +1287,14 @@ address { font-style: normal; }
 
 /* Copy leads, the field sits alongside it. */
 .about-split--story { grid-template-columns: 1.1fr .9fr; }
+
+/* The story column runs long, so the portrait follows the reader down the
+   page rather than leaving a well of empty ground beside the copy. */
+.about-split--story .about-split__media {
+  position: sticky;
+  top: 40px;
+  align-self: start;
+}
 
 /* The portrait leads, and carries the credentials under it. */
 .about-split--prac { grid-template-columns: .78fr 1.22fr; }
@@ -1860,9 +1920,15 @@ address { font-style: normal; }
 
   .about-split { padding: 72px var(--gutter) 88px; grid-template-columns: 1fr; gap: 56px; }
 
+  /* Stacked, the emphasised lines are the only thing breaking the column up,
+     so they get more air around them, not less. */
+  .prose .prose__lead { font-size: 20px; max-width: none; }
+  .prose .prose__line { margin: 32px 0; font-size: 18px; padding-left: 18px; max-width: none; }
+  .prose .prose__close p { font-size: 18px; max-width: none; }
+
   /* Stacked, a 4/5 frame at full shell width is a wall. The field goes
      landscape and the portrait keeps a sensible column of its own. */
-  .about-split--story .about-split__media { aspect-ratio: 5 / 4; }
+  .about-split--story .about-split__media { aspect-ratio: 5 / 4; position: static; }
   .about-split--prac .about-split__aside { max-width: 440px; }
 
   /* Stacked, the raised tier has nothing to sit proud of. */
