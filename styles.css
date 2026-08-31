@@ -1719,6 +1719,37 @@ address { font-style: normal; }
 .tier--lift .tier__price { border-bottom-color: var(--rule-sand-25); }
 .tier--lift .rail__list li::before { background: var(--sand-70); }
 
+/* The credits explainer sits between the tiers and the fine print, on sand so
+   it reads as a clarification rather than another tier. */
+.credits {
+  margin: 54px 0 0;
+  background: var(--sand);
+  border: 1px solid var(--rule-stone-18);
+  padding: 38px 40px;
+}
+
+.credits__title {
+  margin: 0 0 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule-stone-18);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 11.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.credits__copy {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: var(--ink);
+  max-width: 72ch;
+}
+
+.credits__list { margin: 24px 0 0; }
+
 .tiers__note {
   margin: 44px 0 0;
   font-size: 14.5px;
@@ -2076,6 +2107,7 @@ address { font-style: normal; }
   .packages__grid { grid-template-columns: 1fr; margin-top: 40px; }
 
   .tier { padding: 38px 30px; }
+  .credits { padding: 32px 30px; }
 }
 
 @media (max-width: 640px) {
