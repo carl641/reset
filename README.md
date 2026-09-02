@@ -165,7 +165,7 @@ from the current-page `aria-current` and the `../` prefixes on subpage links.
 `https://carl641.github.io/theresetstudio/about/` — the `src/pages/about.astro`
 page of the `carl641/theresetstudio` Astro site. Every word is lifted verbatim:
 the hero, the four story paragraphs, the "Why we exist" band, the five
-principles, and Dr. Ellis' three-paragraph biography with her four credentials.
+principles, and Dr. Candy's three-paragraph biography with her four credentials.
 The two interpolated values are resolved to the strings the source site renders
 from `src/data/site.ts` — the signature line under "Why we exist" is
 `site.tagline`, and the practice named in the last biography paragraph is
@@ -187,7 +187,7 @@ scoped CSS; here each block maps onto a pattern the site already had:
 - Only "Why we exist" is new: a sage band set left rather than centred, so it
   reads as a statement instead of another promise band
 
-**The portrait.** `assets/drcandy.jpeg` is the photograph of Dr. Ellis that was
+**The portrait.** `assets/drcandy.jpeg` is the photograph of Dr. Candy that was
 uploaded to the repository; it fills what was a `portrait-placeholder.webp` slot
 on the source page. It is a 3648×5472 camera original at 4 MB, so the page
 loads `assets/dr-candy-ellis.webp` — the same photograph at 1200×1800, which is
