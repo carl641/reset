@@ -16,10 +16,10 @@ npx http-server -p 8080
 | `index.html` | The home page — semantic markup, one section per block of the mockup |
 | `about/index.html` | The About page — the story, the philosophy, and Dr. Candy Ellis |
 | `services/index.html` | The Services page — both categories, all fifteen services as cards, and Together pricing |
-| `services/<slug>.html` | One page per service |
+| `services/<slug>/index.html` | One page per service |
 | `first-visit/index.html` | The First Visit page — how a first visit goes, how to prepare, and the FAQs |
 | `memberships/index.html` | The Memberships page — the three tiers, founding memberships and gift cards |
-| `policies/cancellation.html` | The cancellation and no-show policy, linked from every footer |
+| `policies/cancellation/index.html` | The cancellation and no-show policy, linked from every footer |
 | `booking.js` | The Boulevard self-booking overlay — loads the injector and opens it from every booking button |
 | `styles.css` | All styling for every page. Palette, type and layout tokens live in `:root` |
 | `assets/` | Logo, the five photographs from the mockup, eleven abstract fields, and Dr. Candy Ellis' portrait |
@@ -88,8 +88,8 @@ Provided by `Dr. Candy, LLC`, an independent practice operating within the
 studio, which is why these pages carry a `Provided by` fact and the footer
 carries the attribution and disclaimer.
 
-**Two pages are delisted rather than deleted.** `cold-plunge.html` and
-`neuro-light-therapy.html` are off the nav, the footer, the ticker and every
+**Two pages are delisted rather than deleted.** `cold-plunge/` and
+`neuro-light-therapy/` are off the nav, the footer, the ticker and every
 card grid, because neither launches as a standalone bookable service. The cold
 plunge is part of Contrast Therapy; neurological light is an optional
 enhancement to Zenthesia Vibroacoustic, folded into that page as its own block.
@@ -124,8 +124,8 @@ equipment notes, the narrative, the benefit list, the "commonly booked for" tags
 and the three-step session walkthrough — came verbatim from
 `src/data/services.ts` of the `carl641/theresetstudio` Astro site. The launch
 edits since then rewrote durations, prices, the Zenthesia rename and the
-wellness claims, and `saunadome-pemf.html`, `stretch-breath-reset.html` and
-`reset-roadmap.html` are new pages built on the same template. Wellness copy
+wellness claims, and `saunadome-pemf/`, `stretch-breath-reset/` and
+`reset-roadmap/` are new pages built on the same template. Wellness copy
 uses *supports* / *may help* / *designed for* / *commonly used for*, and avoids
 cure, fix and guarantee language.
 
@@ -305,8 +305,8 @@ Providence. The photographs are stock imagery from the mockup and should be
 replaced with the studio's own.
 
 Three pages borrow an existing photograph rather than carrying one of their own:
-`saunadome-pemf.html` uses the sauna-bench field, `stretch-breath-reset.html`
-the studio console, and `reset-roadmap.html` the portrait of Dr. Candy in the
+`saunadome-pemf/` uses the sauna-bench field, `stretch-breath-reset/`
+the studio console, and `reset-roadmap/` the portrait of Dr. Candy in the
 front room. The first two keep an empty `alt` on their cards; all three want
 their own photography.
 
