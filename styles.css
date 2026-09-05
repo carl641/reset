@@ -1554,6 +1554,19 @@ address { font-style: normal; }
    needs the gap the heading rule already gives the list on its own. */
 .prep__block .step__copy + .rail__list { margin-top: 22px; }
 
+/* The privacy policy runs several paragraphs to a card, and closes on an
+   address the contact card sets on its own line. */
+.prep__block .step__copy + .step__copy { margin-top: 18px; }
+.prep__block .step__copy + address { margin-top: 22px; }
+.prep__block--wide { grid-column: 1 / -1; }
+
+.policy__address {
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--stone);
+}
+.policy__address a { color: var(--ink); }
+
 /* The screening paragraph, set quieter than the lists it follows. */
 .prep__note {
   margin: 44px 0 0;
