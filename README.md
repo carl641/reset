@@ -87,7 +87,9 @@ header panel, footer column, breadcrumb, home page band and the listing itself.
 Needling, Spinal Decompression, Electrical Stimulation, Therapeutic Ultrasound.
 Provided by `Dr. Candy, LLC`, an independent practice operating within the
 studio, which is why these pages carry a `Provided by` fact and the footer
-carries the attribution and disclaimer.
+carries the attribution and disclaimer. The practice books through its own
+ChiroTouch patient portal rather than Boulevard, so these six pages link out
+to it instead of opening the overlay — see Booking below.
 
 **Two pages are delisted rather than deleted.** `cold-plunge/` and
 `neuro-light-therapy/` are off the nav, the footer, the ticker and every
@@ -272,13 +274,24 @@ expect" button now point at these two pages instead of `#`.
 
 ## Booking
 
-Every booking button on the site opens the Boulevard self-booking overlay.
-`booking.js` loads Boulevard's injector once per page, calls `blvd.init()` with
-the studio's `businessId`, and opens the overlay from any element carrying
-`data-blvd-book` — the header's "Book a Reset", the hero and CTA-band buttons,
-the per-service "Book …" buttons, both membership tier buttons, and the About
-page's "Chiropractic consultation". Adding a booking button anywhere else is one
-attribute; nothing needs registering.
+Every wellness and recovery booking button on the site opens the Boulevard
+self-booking overlay. `booking.js` loads Boulevard's injector once per page,
+calls `blvd.init()` with the studio's `businessId`, and opens the overlay from
+any element carrying `data-blvd-book` — the header's "Book a Reset", the hero
+and CTA-band buttons, the per-service "Book …" buttons on the nine wellness
+pages, and both membership tier buttons. Adding a booking button anywhere else
+is one attribute; nothing needs registering.
+
+**Chiropractic care books elsewhere.** `Dr. Candy, LLC` schedules through its
+ChiroTouch patient portal, `https://patient.chirotouch.com/DrCandyLLC`, which is
+not in Boulevard's menu. So on the six chiropractic service pages the hero and
+CTA-band buttons are plain "Book an Appointment" links to that portal, with no
+`data-blvd-book`, and the same link sits in the Chiropractic Care band on the
+services listing and under Dr. Candy's biography on the About page. The header's
+"Book a Reset" is site-wide chrome and still opens Boulevard on those pages. The
+portal opens in a new tab (`target="_blank" rel="noopener"`) because it is a
+separate site with its own multi-step flow, unlike the overlay, which keeps the
+visitor on the page.
 
 The buttons keep `href="#"` and the handler cancels the jump, so the markup
 still reads as a link and a click never scrolls the page. A click that lands
@@ -329,5 +342,6 @@ They are set in three places per service — the detail page's `.facts` block, t
 `.service__meta` line on every card linking to it, and the Together table on the
 services page — so a change to one is a change to all three.
 
-Booking buttons still point at `#` and open the Boulevard overlay at its menu;
-that was deliberate and is unchanged by the launch edits.
+Wellness booking buttons still point at `#` and open the Boulevard overlay at
+its menu; that was deliberate and is unchanged by the launch edits. The
+chiropractic buttons link out to the ChiroTouch portal instead.

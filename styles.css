@@ -1356,7 +1356,13 @@ address { font-style: normal; }
 /* On services/ the band opens with its heading rather than an eyebrow. */
 .why__lead:first-child { margin-top: 0; }
 
-.why__action { margin: 40px 0 0; }
+.why__action {
+  margin: 40px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 32px;
+}
 
 .link-underline--cream { color: var(--cream); border-bottom-color: var(--sand-70); }
 .link-underline--cream:hover { color: var(--sand); }
