@@ -415,6 +415,24 @@ address { font-style: normal; }
 
 .hero__content .btn { pointer-events: auto; }
 
+/* Launch notice — a quiet line sitting just above the hero button. */
+.hero__notice {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 6px 0;
+  margin: -14px 0 22px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--tan);
+  pointer-events: auto;
+}
+.hero__notice strong { font-weight: 500; color: var(--cream); }
+.hero__notice-sep { margin: 0 .9em; opacity: .7; }
+
 /* --------------------------------------------------------------------------
    Services ticker — a quiet, continuous index of what the studio offers,
    carrying the eye from the hero into the page.
@@ -2145,6 +2163,8 @@ address { font-style: normal; }
      unpositioned in-flow content. */
   .hero { height: auto; min-height: 0; padding: 120px 0 130px; }
   .hero__content { position: relative; inset: auto; }
+  .hero__notice { flex-direction: column; align-items: center; gap: 7px; font-size: 10px; letter-spacing: .24em; }
+  .hero__notice-sep { display: none; }
 
   .split__actions { width: 100%; }
   .split__actions .btn { flex: 1 1 auto; text-align: center; }
