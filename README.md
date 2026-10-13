@@ -73,10 +73,10 @@ The mockup is a fixed desktop composition. Three things were added on top of it:
 
 ## Services
 
-Fifteen services sit under `services/`, in two categories.
+Sixteen services sit under `services/`, in two categories.
 
-**Wellness & Recovery** — Contrast Therapy, Infrared Sauna, SaunaDome + PEMF,
-Red Light Therapy, Flowpresso® Therapy, NormaTec® Compression, Zenthesia
+**Wellness & Recovery** — Contrast Therapy, Cold Plunge, Infrared Sauna, SaunaDome + PEMF,
+Full-Body Red Light Therapy, Flowpresso® Lymphatic Compression, NormaTec® Compression, Zenthesia
 Vibroacoustic, Stretch + Breath Reset, Reset Roadmap with Dr. Candy. These were
 the site's "Modalities". The word is gone: the source
 catalogue calls the category Wellness and Recovery, the service pages already
@@ -91,14 +91,15 @@ carries the attribution and disclaimer. The practice books through its own
 ChiroTouch patient portal rather than Boulevard, so these six pages link out
 to it instead of opening the overlay — see Booking below.
 
-**Two pages are delisted rather than deleted.** `cold-plunge/` and
-`neuro-light-therapy/` are off the nav, the footer, the ticker and every
-card grid, because neither launches as a standalone bookable service. The cold
-plunge is part of Contrast Therapy; neurological light is an optional
-enhancement to Zenthesia Vibroacoustic, folded into that page as its own block.
-Both files stay live and reframed, so any link already in the wild still lands
-somewhere honest and points at the service the content moved into. Neither page
-carries a booking button any more.
+**One page is delisted rather than deleted.** `neuro-light-therapy/` is off
+the nav, the footer, the ticker and every card grid, because it does not launch
+as a standalone bookable service: neurological light is an optional enhancement
+to Zenthesia Vibroacoustic, folded into that page as its own block. The file
+stays live and reframed, so any link already in the wild still lands somewhere
+honest, and it carries no booking button. `cold-plunge/` was delisted the same
+way until the final service menu added it back as a standalone 15-minute
+service; it is listed everywhere again and is also still part of Contrast
+Therapy.
 
 **Durations and prices** live in three places that have to agree: the `.facts`
 block on the detail page, the `.service__meta` line on every card that links to
@@ -106,17 +107,18 @@ it, and the Together table on the services page. `scratchpad`-style one-off
 scripts are how the card copy was last normalized across all of them; the
 canonical values are the launch menu below.
 
-| Service | Duration | Single | Together |
-| --- | --- | --- | --- |
-| NormaTec® Compression | 30 min | $45 | 2 — $90 · 3 — $135 |
-| Full-Body Red Light | 20 min | $45 | 2 — $69 |
-| Infrared Sauna | 30 min | $49 | 2 — $69 · 3 — $89 · 4 — $109 |
-| SaunaDome + PEMF | 30 min | $59 | 2 — $99 |
-| Zenthesia Vibroacoustic | 30 min | $59 | 2 — $89 |
-| Contrast Therapy | ~45 min | $79 | 2 — $119 |
-| Flowpresso® | 40 min | $89 | — |
-| Stretch + Breath Reset | 15 min | $45 | — |
-| Reset Roadmap with Dr. Candy | 30 min | $79 | — |
+| Service | Duration | Single | Credits | Together |
+| --- | --- | --- | --- | --- |
+| NormaTec® Compression | 30 min | $49 | 1 | 2 — $90 · 3 — $135 |
+| Full-Body Red Light Therapy | 20 min | $55 | 1 | 2 — $69 |
+| Infrared Sauna | 30 min | $55 | 1 | 2 — $69 · 3 — $89 · 4 — $109 |
+| SaunaDome + PEMF | 30 min | $65 | 1 | 2 — $99 |
+| Zenthesia Vibroacoustic | 30 min | $65 | 1 | 2 — $89 |
+| Contrast Therapy | ~45 min | $89 | 2 | 2 — $119 |
+| Flowpresso® Lymphatic Compression | 40 min | $99 | 2 | — |
+| Cold Plunge | 15 min | $39 | 1 | — |
+| Stretch + Breath Reset | 15 min | $49 | 1 | — |
+| Reset Roadmap with Dr. Candy | 30 min | $79 | 1 | — |
 
 Together is for guests who chose to come in with each other. Nothing on the site
 should imply strangers are placed in a private room together, and compression is

@@ -690,6 +690,8 @@ address { font-style: normal; }
   margin: 0;
 }
 
+.split__body .fine-note { margin-top: -16px; }
+
 .split__actions { display: flex; gap: 18px; flex-wrap: wrap; }
 
 /* --------------------------------------------------------------------------
@@ -981,6 +983,17 @@ address { font-style: normal; }
   margin: 22px 0 0;
   font-size: 16px;
   line-height: 1.85;
+  color: var(--stone);
+  max-width: 52ch;
+}
+
+/* A quiet aside beneath a description, e.g. the Reset Roadmap credit offer. */
+.fine-note {
+  margin: 12px 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.7;
   color: var(--stone);
   max-width: 52ch;
 }
