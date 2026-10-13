@@ -118,7 +118,12 @@ canonical values are the launch menu below.
 | Flowpresso® Lymphatic Compression | 40 min | $99 | 2 | — |
 | Cold Plunge | 15 min | $39 | 1 | — |
 | Stretch + Breath Reset | 15 min | $49 | 1 | — |
-| Reset Roadmap with Dr. Candy | 30 min | $79 | 1 | — |
+| Reset Roadmap with Dr. Candy | 30 min | $79 | cash-pay only | — |
+
+**Reset Packages** (services page, `#reset-packages`) are cash-only and do not
+use credits, though the site does not say so: Deep Reset — 40 min, $99
+(Zenthesia + Roxiva light stimulation); Signature Reset — 75 min, $109
+(Zenthesia + SaunaDome and PEMF mat).
 
 Together is for guests who chose to come in with each other. Nothing on the site
 should imply strangers are placed in a private room together, and compression is
@@ -259,6 +264,11 @@ over for thirty days and no further. RESET 16 is the high-frequency tier and is
 explicitly not unlimited. Chiropractic care is not included in any membership —
 it is separate clinical care on its own booking path — and the session bundles
 that used to sit below the tiers are gone.
+
+**The Complete Reset** is the premium tier at $999/month on a three-month
+minimum: 16 Reset credits, up to 4 chiropractic appointments, a monthly
+20-minute consultation and supplement guidance. It is the only membership that
+includes chiropractic care; the copy elsewhere says so.
 
 **Founding memberships** are framed as exclusivity rather than a sale: the first
 fifty members only, presented as two benefit lines (15% off the first six months,
