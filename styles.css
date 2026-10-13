@@ -690,6 +690,8 @@ address { font-style: normal; }
   margin: 0;
 }
 
+.split__body .fine-note { margin-top: -16px; }
+
 .split__actions { display: flex; gap: 18px; flex-wrap: wrap; }
 
 /* --------------------------------------------------------------------------
@@ -981,6 +983,17 @@ address { font-style: normal; }
   margin: 22px 0 0;
   font-size: 16px;
   line-height: 1.85;
+  color: var(--stone);
+  max-width: 52ch;
+}
+
+/* A quiet aside beneath a description, e.g. the Reset Roadmap credit offer. */
+.fine-note {
+  margin: 12px 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--stone);
   max-width: 52ch;
 }
@@ -1756,6 +1769,57 @@ address { font-style: normal; }
 .tier--lift .tier__price { border-bottom-color: var(--rule-sand-25); }
 .tier--lift .rail__list li::before { background: var(--sand-70); }
 
+/* The Complete Reset: the premium membership, full width beneath the three
+   tiers so its longer list of inclusions has room. */
+.premium {
+  margin: 54px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  padding: 54px 56px;
+  border: 1px solid var(--tan);
+  background: var(--cream);
+}
+.premium .kicker { margin: 0; }
+.premium__name {
+  margin: 18px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 40px);
+  line-height: 1.2;
+  color: var(--ink);
+}
+.premium__tagline {
+  margin: 12px 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--stone);
+}
+.premium__copy { margin: 0; font-size: 16px; line-height: 1.85; color: var(--stone); max-width: 46ch; }
+.premium .tier__price { margin-top: 28px; padding-bottom: 28px; margin-bottom: 28px; }
+.premium__label {
+  margin: 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule-stone-18);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.premium .rail__list { margin: 22px 0 0; }
+.premium__note {
+  margin: 26px 0 30px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--stone);
+}
+
 /* The credits explainer sits between the tiers and the fine print, on sand so
    it reads as a clarification rather than another tier. */
 .credits {
@@ -1909,6 +1973,21 @@ address { font-style: normal; }
 
 .pk { border: 1px solid var(--rule-stone-18); padding: 34px 36px; }
 
+/* Reset Packages: two signature experiences given equal weight, wider than
+   the three-up pairings so the longer descriptions read comfortably. */
+.packages__grid--pair { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.pk--feature { display: flex; flex-direction: column; padding: 44px 46px; background: var(--cream); }
+.pk--feature .pk__title { font-size: 28px; line-height: 1.25; }
+.pk__meta {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+.pk--feature .pk__copy { margin: 22px 0 34px; font-size: 16.5px; line-height: 1.85; flex: 1; max-width: 52ch; }
+.pk--feature .btn { align-self: flex-start; }
+
 .pk__count {
   margin: 0 0 24px;
   display: flex;
@@ -2003,6 +2082,7 @@ address { font-style: normal; }
   .tiers { padding: 72px var(--gutter) 88px; }
   .tiers__grid { grid-template-columns: 1fr; gap: 28px; }
   .tier--lift { margin-top: 0; }
+  .premium { grid-template-columns: 1fr; gap: 36px; padding: 40px 28px; }
 
   .site-footer__top { grid-template-columns: repeat(2, 1fr); gap: 48px 40px; }
   .site-footer__brand { grid-column: 1 / -1; }
@@ -2142,6 +2222,7 @@ address { font-style: normal; }
 
   .packages__inner { padding: 72px var(--gutter); }
   .packages__grid { grid-template-columns: 1fr; margin-top: 40px; }
+  .pk--feature { padding: 34px 28px; }
 
   .tier { padding: 38px 30px; }
   .credits { padding: 32px 30px; }
