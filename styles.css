@@ -1597,6 +1597,22 @@ address { font-style: normal; }
 .prep__block .step__copy + address { margin-top: 22px; }
 .prep__block--wide { grid-column: 1 / -1; }
 
+/* The terms run longer sections, broken by small titled subsections and
+   lists that close on a paragraph. */
+.policy__subhead {
+  margin: 30px 0 0;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.policy__subhead + .step__copy,
+.policy__subhead + .rail__list { margin-top: 12px; }
+.prep__block .rail__list + .step__copy,
+.prep__block .rail__list + .policy__subhead { margin-top: 22px; }
+
 .policy__address {
   font-size: 15.5px;
   line-height: 1.8;

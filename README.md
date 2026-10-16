@@ -21,6 +21,7 @@ npx http-server -p 8080
 | `memberships/index.html` | The Memberships page — the three tiers, founding memberships and gift cards |
 | `policies/cancellation/index.html` | The cancellation and no-show policy, linked from every footer |
 | `privacy/index.html` | The privacy policy, linked from every footer |
+| `terms/index.html` | The terms & conditions, linked from every footer |
 | `booking.js` | The Boulevard self-booking overlay — loads the injector and opens it from every booking button |
 | `styles.css` | All styling for every page. Palette, type and layout tokens live in `:root` |
 | `assets/` | Logo, the five photographs from the mockup, eleven abstract fields, and Dr. Candy Ellis' portrait |
