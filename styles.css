@@ -197,6 +197,38 @@ address { font-style: normal; }
 .site-nav a { white-space: nowrap; }
 
 /* --------------------------------------------------------------------------
+   Social links
+
+   One icon row shared by the header nav and the footer brand block; each
+   placement only sets its colours.
+   -------------------------------------------------------------------------- */
+.social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  transition: color .2s;
+}
+.social svg { display: block; width: 18px; height: 18px; }
+
+.social--header { margin: 0 -8px; }
+.social--header a { color: var(--stone); }
+.social--header a:hover { color: var(--sage); }
+
+.social--footer { margin-left: -8px; }
+.social--footer a { color: var(--sand); }
+.social--footer a:hover { color: var(--tan); }
+
+/* --------------------------------------------------------------------------
    Services dropdown
 
    No JavaScript: the trigger is a real link to the services index, so a tap
@@ -2145,6 +2177,14 @@ address { font-style: normal; }
     padding: 17px 0;
     border-bottom: 1px solid var(--rule-stone-14);
   }
+  .social--header {
+    margin: 0;
+    padding: 14px 0 0;
+    gap: 10px;
+  }
+  .social--header a { width: 44px; height: 44px; }
+  .social--header li:first-child a { margin-left: -13px; }
+
   .site-nav .btn {
     margin-top: 24px;
     padding: 17px 28px;
