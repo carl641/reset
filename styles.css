@@ -462,7 +462,6 @@ address { font-style: normal; }
   color: var(--tan);
   pointer-events: auto;
 }
-.hero__notice strong { font-weight: 500; color: var(--cream); }
 .hero__notice-sep { margin: 0 .9em; opacity: .7; }
 
 /* --------------------------------------------------------------------------
