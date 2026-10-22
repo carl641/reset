@@ -447,6 +447,13 @@ address { font-style: normal; }
 
 .hero__content .btn { pointer-events: auto; }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
 /* Launch notice — a quiet line sitting just above the hero button. */
 .hero__notice {
   display: flex;
@@ -2301,6 +2308,8 @@ address { font-style: normal; }
   .hero__content { position: relative; inset: auto; }
   .hero__notice { flex-direction: column; align-items: center; gap: 7px; font-size: 10px; letter-spacing: .24em; }
   .hero__notice-sep { display: none; }
+  .hero__actions { width: 100%; }
+  .hero__actions .btn { flex: 1 1 auto; text-align: center; }
 
   .split__actions { width: 100%; }
   .split__actions .btn { flex: 1 1 auto; text-align: center; }
